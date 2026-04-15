@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="deck-mode">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Beautifier - 多功能 HTML 美化系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose-500: #e8889a; --rose-100: #fdf0f3; --rose-50: #fef7f8; --rose-deep: #c45a65;
+            --mint-500: #6bc4a6; --mint-100: #edf9f4; --mint-50: #f5fcf9; --mint-deep: #3d8e72;
+            --lavender-500: #a78bda; --lavender-100: #f3eefb; --lavender-50: #f9f6fd; --lavender-deep: #6b4fa0;
+            --butter-500: #e4c56a; --butter-100: #fdf8e8; --butter-50: #fefcf3; --butter-deep: #b89520;
+            --sky-500: #7ab4d9; --sky-100: #edf5fb; --sky-50: #f5f9fd; --sky-deep: #3a7aaa;
+            --peach-500: #e8a87c; --peach-100: #fdf3ec; --peach-50: #fef9f5; --peach-deep: #c47530;
+            --ink-900: #1a1a2e; --ink-800: #2d2b3d; --ink-600: #4a4862; --ink-500: #6b6880;
+            --ink-400: #908da3; --ink-300: #b5b3c4; --ink-200: #d8d6e3; --ink-100: #eceaf3;
+            --base-50: #fafbfc; --base-100: #f1f0f5;
+            --card-border: #e8e6ef;
+            --card-shadow: 0 1px 3px rgba(100,80,140,0.04), 0 4px 16px rgba(100,80,140,0.04);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', 'DM Sans', -apple-system, 'PingFang SC', sans-serif;
+            color: var(--ink-900); background: var(--base-50);
+            -webkit-font-smoothing: antialiased; line-height: 1.75; font-weight: 400;
+        }
+        html.deck-mode { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+        .deck-mode #deck > section {
+            min-height: 100vh; scroll-snap-align: start; scroll-snap-stop: always;
+            overflow-y: auto; position: relative;
+        }
+        .page-number {
+            position: absolute; bottom: 16px; right: 24px;
+            font-family: 'DM Sans', sans-serif; font-size: 12px;
+            color: var(--ink-400); font-weight: 500;
+        }
+        .cover {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 60px 40px; background: var(--base-50); position: relative; text-align: center;
+        }
+        .cover-inner { position: relative; z-index: 1; max-width: 680px; }
+        .cover-brand {
+            width: 56px; height: 56px; border-radius: 16px;
+            background: linear-gradient(135deg, var(--lavender-500), var(--rose-500));
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 48px; box-shadow: 0 4px 20px rgba(167,139,218,0.3);
+            color: #fff; font-size: 24px;
+        }
+        .cover-tag {
+            font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--lavender-500); margin-bottom: 20px;
+        }
+        .cover h1 {
+            font-family: 'Noto Serif SC', serif; font-size: 44px; font-weight: 900;
+            line-height: 1.3; margin-bottom: 20px;
+        }
+        .cover-sub { font-size: 18px; color: var(--ink-500); margin-bottom: 36px; }
+        .cover-meta {
+            display: flex; align-items: center; justify-content: center;
+            gap: 12px; font-size: 13px; color: var(--ink-400);
+        }
+        .cover-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ink-300); }
+        .bg-dot {
+            background-image: radial-gradient(circle, var(--ink-200) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+        .gt-rose {
+            background: linear-gradient(135deg, var(--rose-500), var(--rose-deep));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .gt-mint {
+            background: linear-gradient(135deg, var(--mint-500), var(--mint-deep));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .gt-sky {
+            background: linear-gradient(135deg, var(--sky-500), var(--sky-deep));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .section-page { padding: 60px 80px; background: #fff; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-header { margin-bottom: 24px; }
+        .section-tag {
+            font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+        }
+        .section-title {
+            font-family: 'Noto Serif SC', serif; font-size: 32px; font-weight: 900;
+            line-height: 1.35; margin-bottom: 10px;
+        }
+        .section-desc { font-size: 14px; color: var(--ink-500); line-height: 1.8; max-width: 680px; }
+        .section-divider { width: 48px; height: 3px; border-radius: 2px; margin-top: 14px; }
+        .section-divider.rose { background: linear-gradient(90deg, var(--rose-500), var(--rose-deep)); }
+        .section-divider.mint { background: linear-gradient(90deg, var(--mint-500), var(--mint-deep)); }
+        .section-divider.sky { background: linear-gradient(90deg, var(--sky-500), var(--sky-deep)); }
+        .card-light {
+            background: #fff; border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow); border-radius: 14px; padding: 20px 22px;
+        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .icon-box {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; flex-shrink: 0;
+        }
+        .badge {
+            display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 100px;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.02em;
+        }
+        .challenge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .challenge-card {
+            border-radius: 14px; padding: 28px 26px;
+            display: flex; gap: 16px; align-items: flex-start;
+        }
+        .challenge-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+        .challenge-desc { font-size: 13px; color: var(--ink-500); line-height: 1.7; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 24px; }
+        .stat-card { border-radius: 14px; padding: 32px; text-align: center; }
+        .stat-number {
+            font-family: 'DM Sans', sans-serif; font-size: 42px; font-weight: 700;
+            line-height: 1.1; letter-spacing: -0.02em;
+        }
+        .stat-label { font-size: 13px; color: var(--ink-500); margin-top: 4px; }
+        .cap-top { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px; }
+        .cap-card { border-radius: 12px; padding: 20px 16px; }
+        .cap-card h4 { font-size: 14px; font-weight: 800; margin-top: 10px; margin-bottom: 6px; }
+        .cap-card p { font-size: 12px; color: var(--ink-500); line-height: 1.6; }
+        .cta-section {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 60px 40px; background: #fff;
+        }
+        .cta-section h2 {
+            font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 900; margin-bottom: 14px;
+        }
+        .cta-section p { font-size: 16px; color: var(--ink-500); margin-bottom: 32px; }
+        .cta-box {
+            border-radius: 16px; padding: 32px; display: flex; align-items: center; gap: 20px;
+            background: var(--lavender-50); border: 1px solid var(--lavender-100);
+        }
+        @media print {
+            html { scroll-snap-type: none !important; }
+            body { background: #fff; }
+            #deck > section { min-height: auto !important; page-break-after: always; }
+            .page-number { display: none; }
+        }
+        @media (max-width: 1024px) {
+            .section-page { padding: 32px 24px; }
+            .section-title { font-size: 28px !important; }
+            .cover h1 { font-size: 34px !important; }
+            .grid-3, .grid-4 { grid-template-columns: 1fr 1fr !important; }
+            .cap-top { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 640px) {
+            .section-page { padding: 24px 16px; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr !important; }
+            .challenge-grid { grid-template-columns: 1fr !important; }
+        }
+    </style>
+</head>
+<body>
+<div id="deck">
+    <!-- 封面 -->
+    <section class="cover">
+        <div class="bg-dot" style="position:absolute;inset:0;z-index:0;"></div>
+        <div class="cover-inner">
+            <div class="cover-brand"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <p class="cover-tag">HTML BEAUTIFIER</p>
+            <h1>多功能 HTML<br><span class="gt-rose">美化系统</span></h1>
+            <p class="cover-sub">将任何内容转换为专业级视觉化页面</p>
+            <div class="cover-meta">
+                <span>Blake Xu</span><span class="dot"></span><span>2026</span>
+            </div>
+        </div>
+        <span class="page-number">1 / 6</span>
+    </section>
+
+    <!-- 核心特点 -->
+    <section class="section-page">
+        <div class="section-inner">
+            <div class="section-header">
+                <p class="section-tag" style="color: var(--rose-500);">
+                    <i class="fa-solid fa-star"></i> CORE FEATURES
+                </p>
+                <h2 class="section-title">整合三个优秀 Skill<br>打造<span class="gt-rose">全能美化工具</span></h2>
+                <p class="section-desc">从三个经过验证的视觉设计系统中提炼精华，创造出功能最全面的 HTML 美化解决方案。</p>
+                <div class="section-divider rose"></div>
+            </div>
+
+            <div class="challenge-grid">
+                <div class="challenge-card card-light">
+                    <div class="icon-box" style="background: var(--rose-100); color: var(--rose-500);">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <div>
+                        <h3 class="challenge-title">四种布局模式</h3>
+                        <p class="challenge-desc">Deck 幻灯片、Editorial 长滚动、Dashboard 看板、Single 单页，覆盖所有场景需求。</p>
+                    </div>
+                </div>
+                <div class="challenge-card card-light">
+                    <div class="icon-box" style="background: var(--mint-100); color: var(--mint-500);">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <div>
+                        <h3 class="challenge-title">交互式确认</h3>
+                        <p class="challenge-desc">生成前询问场景和风格偏好，避免返工，确保输出符合用户期望。</p>
+                    </div>
+                </div>
+                <div class="challenge-card card-light">
+                    <div class="icon-box" style="background: var(--sky-100); color: var(--sky-500);">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <div>
+                        <h3 class="challenge-title">马卡龙色系</h3>
+                        <p class="challenge-desc">六色配色体系，每色三级梯度，柔和不刺眼，专业又有亲和力。</p>
+                    </div>
+                </div>
+                <div class="challenge-card card-light">
+                    <div class="icon-box" style="background: var(--lavender-100); color: var(--lavender-500);">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h3 class="challenge-title">参考学习</h3>
+                        <p class="challenge-desc">8 维度视觉拆解，从现有网页学习精髓，用本系统语言创新实现。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="page-number">2 / 6</span>
+    </section>
+
+    <!-- 数据展示 -->
+    <section class="section-page">
+        <div class="section-inner">
+            <div class="section-header">
+                <p class="section-tag" style="color: var(--mint-500);">
+                    <i class="fa-solid fa-chart-line"></i> BY THE NUMBERS
+                </p>
+                <h2 class="section-title">强大的<span class="gt-mint">设计系统</span></h2>
+                <p class="section-desc">完整的组件库和设计规范，确保每个页面都达到专业级视觉品质。</p>
+                <div class="section-divider mint"></div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card card-light">
+                    <div class="stat-number" style="color: var(--rose-500);">4</div>
+                    <div class="stat-label">布局模式</div>
+                </div>
+                <div class="stat-card card-light">
+                    <div class="stat-number" style="color: var(--mint-500);">6</div>
+                    <div class="stat-label">马卡龙配色</div>
+                </div>
+                <div class="stat-card card-light">
+                    <div class="stat-number" style="color: var(--sky-500);">25+</div>
+                    <div class="stat-label">核心组件</div>
+                </div>
+            </div>
+
+            <div class="grid-3" style="margin-top: 24px;">
+                <div class="card-light">
+                    <div class="icon-box" style="background: var(--rose-100); color: var(--rose-500); margin-bottom: 12px;">
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">统一卡片系统</h4>
+                    <p style="font-size: 12px; color: var(--ink-500); line-height: 1.6;">card-light 万能容器，圆角、阴影、边框完全统一。</p>
+                </div>
+                <div class="card-light">
+                    <div class="icon-box" style="background: var(--mint-100); color: var(--mint-500); margin-bottom: 12px;">
+                        <i class="fa-solid fa-font"></i>
+                    </div>
+                    <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">专业字体排版</h4>
+                    <p style="font-size: 12px; color: var(--ink-500); line-height: 1.6;">Noto Sans SC + Noto Serif SC，清晰易读。</p>
+                </div>
+                <div class="card-light">
+                    <div class="icon-box" style="background: var(--sky-100); color: var(--sky-500); margin-bottom: 12px;">
+                        <i class="fa-solid fa-print"></i>
+                    </div>
+                    <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">打印友好</h4>
+                    <p style="font-size: 12px; color: var(--ink-500); line-height: 1.6;">零动画零交互，打开即可打印、截图。</p>
+                </div>
+            </div>
+        </div>
+        <span class="page-number">3 / 6</span>
+    </section>
+
+    <!-- 四种模式 -->
+    <section class="section-page">
+        <div class="section-inner">
+            <div class="section-header">
+                <p class="section-tag" style="color: var(--sky-500);">
+                    <i class="fa-solid fa-th-large"></i> LAYOUT MODES
+                </p>
+                <h2 class="section-title">四种布局模式<br>覆盖<span class="gt-sky">所有场景</span></h2>
+                <p class="section-desc">根据内容特征和使用场景，自动选择最合适的布局模式。</p>
+                <div class="section-divider sky"></div>
+            </div>
+
+            <div class="cap-top">
+                <div class="cap-card card-light">
+                    <div class="icon-box" style="background: var(--rose-100); color: var(--rose-500);">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h4>Deck 幻灯片</h4>
+                    <p>scroll-snap 全屏翻页，适合方案展示、产品介绍。</p>
+                </div>
+                <div class="cap-card card-light">
+                    <div class="icon-box" style="background: var(--mint-100); color: var(--mint-500);">
+                        <i class="fa-solid fa-scroll"></i>
+                    </div>
+                    <h4>Editorial 长滚动</h4>
+                    <p>连续阅读体验，适合分析报告、深度内容。</p>
+                </div>
+                <div class="cap-card card-light">
+                    <div class="icon-box" style="background: var(--sky-100); color: var(--sky-500);">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h4>Dashboard 看板</h4>
+                    <p>卡片网格排列，适合数据汇总、状态展示。</p>
+                </div>
+                <div class="cap-card card-light">
+                    <div class="icon-box" style="background: var(--lavender-100); color: var(--lavender-500);">
+                        <i class="fa-solid fa-file"></i>
+                    </div>
+                    <h4>Single 单页</h4>
+                    <p>一页搞定，适合海报、简历、邀请函。</p>
+                </div>
+            </div>
+
+            <div class="card-light" style="background: var(--sky-50); border: 1px solid var(--sky-100); padding: 20px 28px; text-align: center; margin-top: 20px;">
+                <p style="font-size: 14px; line-height: 1.8; color: var(--ink-600);">
+                    <strong style="color: var(--sky-500);">智能选择</strong>：根据内容特征自动推荐最合适的布局模式，也可由用户手动指定。
+                </p>
+            </div>
+        </div>
+        <span class="page-number">4 / 6</span>
+    </section>
+
+    <!-- 使用场景 -->
+    <section class="section-page">
+        <div class="section-inner">
+            <div class="section-header">
+                <p class="section-tag" style="color: var(--lavender-500);">
+                    <i class="fa-solid fa-rocket"></i> USE CASES
+                </p>
+                <h2 class="section-title">适用于<span class="gt-rose">所有场景</span></h2>
+                <p class="section-desc">从网页设计到报告美化，从数据看板到方案展示，一个 skill 全搞定。</p>
+                <div class="section-divider rose"></div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card-light">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span class="badge" style="background: var(--rose-100); color: var(--rose-500);">网页设计</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--ink-500); line-height: 1.7;">
+                        创建产品介绍页、公司官网、个人作品集等精美网页。
+                    </p>
+                </div>
+                <div class="card-light">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span class="badge" style="background: var(--mint-100); color: var(--mint-500);">报告美化</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--ink-500); line-height: 1.7;">
+                        将文本报告转换为视觉化 HTML，提升汇报效果。
+                    </p>
+                </div>
+                <div class="card-light">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span class="badge" style="background: var(--sky-100); color: var(--sky-500);">数据看板</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--ink-500); line-height: 1.7;">
+                        展示关键指标、项目状态、经营数据等信息。
+                    </p>
+                </div>
+                <div class="card-light">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span class="badge" style="background: var(--lavender-100); color: var(--lavender-500);">方案展示</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--ink-500); line-height: 1.7;">
+                        制作 pitch deck、解决方案、产品方案等展示页面。
+                    </p>
+                </div>
+                <div class="card-light">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span class="badge" style="background: var(--peach-100); color: var(--peach-500);">PPT 替代</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--ink-500); line-height: 1.7;">
+                        用 HTML 幻灯片替代传统 PPT，更灵活更美观。
+                    </p>
+                </div>
+                <div class="card-light">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span class="badge" style="background: var(--butter-100); color: var(--butter-500);">内容可视化</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--ink-500); line-height: 1.7;">
+                        将任何文本内容转换为结构化、视觉化的页面。
+                    </p>
+                </div>
+            </div>
+        </div>
+        <span class="page-number">5 / 6</span>
+    </section>
+
+    <!-- 结束页 -->
+    <section class="cta-section">
+        <div class="cover-brand" style="margin-bottom: 32px;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <h2>开始使用<br><span class="gt-rose">HTML Beautifier</span></h2>
+        <p>将任何内容转换为专业级视觉化页面</p>
+        <div class="cta-box">
+            <div class="icon-box" style="background: var(--lavender-500); color: #fff; width: 48px; height: 48px; font-size: 20px;">
+                <i class="fa-solid fa-download"></i>
+            </div>
+            <div style="text-align: left;">
+                <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 4px; color: var(--ink-900);">安装 Skill</h4>
+                <p style="font-size: 13px; color: var(--ink-500);">
+                    复制 html-beautifier.skill 到 ~/.claude/skills/ 目录
+                </p>
+            </div>
+        </div>
+        <p style="font-size: 13px; color: var(--ink-400); margin-top: 32px;">
+            Created by Blake Xu · 2026
+        </p>
+        <span class="page-number">6 / 6</span>
+    </section>
+</div>
+</body>
+</html>
