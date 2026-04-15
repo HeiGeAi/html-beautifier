@@ -116,9 +116,8 @@
 - 添加 @media print 样式：
   ```css
   @media print {
-      html { scroll-snap-type: none !important; }
       body { background: #fff; }
-      #deck > section { page-break-after: always; }
+      .card-light { break-inside: avoid; }
       .page-number { display: none; }
   }
   ```

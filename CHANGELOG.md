@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2024-04-15
+
+### Changed
+- 🔄 移除 Deck（幻灯片）模式，简化为三种布局模式
+- 🔄 移除所有动画效果（transition、animation、scroll-snap）
+- 🔄 优化打印友好性，确保打印即最终呈现效果
+- 📝 更新文档，移除 Deck 相关内容
+- 📝 精简 design-system.md，从 1188 行减少到 866 行
+
+### Removed
+- ❌ Deck 模式及其 10 种页面模板
+- ❌ scroll-snap 翻页效果
+- ❌ 所有 CSS 动画和过渡效果
+- ❌ hover 交互效果
+
+### Improved
+- ✅ Editorial 模式成为默认推荐（适合 80% 场景）
+- ✅ 所有输出均为静态页面，无动画干扰
+- ✅ 打印效果与屏幕显示完全一致
+- ✅ 更简洁的组件库和模板
+
 ## [1.1.0] - 2024-04-15
 
 ### Added

@@ -33,7 +33,7 @@
 ### 2.1 页面节奏
 
 观察并记录：
-- 是 deck 式一屏一屏翻页，还是连续长滚动？
+- 是长滚动连续阅读，还是分段式布局？
 - 每个模块是强对比还是温和递进？
 - 首屏是先打气场，还是先讲功能？
 - 模块之间有没有"呼吸点"（留白段、分隔符、颜色切换）？
@@ -118,11 +118,11 @@
 ### 3.1 命名原创方向
 
 给你的设计方向起一个名字，例如：
-- Command Deck（指挥舱风格）
-- Workflow Gallery（工作流画廊）
 - Editorial OS（编辑系统）
 - Data Canvas（数据画布）
-- Minimal Deck（极简幻灯片）
+- Workflow Gallery（工作流画廊）
+- Command Center（指挥中心风格）
+- Minimal Flow（极简流动式）
 
 ### 3.2 明确设计决策
 
@@ -132,7 +132,7 @@
 - 商务专业 / 活力创意 / 简约优雅 / 科技未来 / 温暖人文
 
 **模块结构**：
-- 采用哪种布局模式（Deck / Editorial / Dashboard / Single）
+- 采用哪种布局模式（Editorial / Dashboard / Single）
 - 包含哪些核心模块
 - 模块的排列顺序
 

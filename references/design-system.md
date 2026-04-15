@@ -1,7 +1,9 @@
 # Design System Reference（完整组件库）
 
-本文件包含 html-visual-craft 技能的全部 CSS 变量、组件代码和页面模板。
+本文件包含 html-beautifier 的全部 CSS 变量、组件代码和页面模板。
 生成 HTML 时，从此处复制所需组件，组装成完整页面。
+
+**重要说明**：所有样式均为静态，无动画效果（无 transition、animation、hover），确保打印友好。
 
 ## 目录
 
@@ -15,21 +17,10 @@
 8. [badge 药丸标签](#8-badge)
 9. [num-dot 编号圆点](#9-num-dot)
 10. [icon-box 图标容器](#10-icon-box)
-11. [封面 Cover](#11-封面)
-12. [章节 Header](#12-章节-header)
-13. [团队 + 时间线](#13-团队时间线)
-14. [挑战/痛点 Challenge](#14-挑战模板)
-15. [三层架构 Solution](#15-三层架构)
-16. [数据统计 Stats](#16-数据统计)
-17. [能力矩阵 Capabilities](#17-能力矩阵)
-18. [场景目录 Catalog](#18-场景目录)
-19. [旅程/流程 Journey](#19-旅程流程)
-20. [深色段 Dark Section](#20-深色段)
-21. [结束页 CTA](#21-结束页)
-22. [Dashboard 看板组件](#22-dashboard)
-23. [Editorial 编辑式组件](#23-editorial)
-24. [工具类 Utilities](#24-utilities)
-25. [组装示例](#25-组装示例)
+11. [Editorial 长滚动组件](#11-editorial)
+12. [Dashboard 看板组件](#12-dashboard)
+13. [工具类 Utilities](#13-utilities)
+14. [组装示例](#14-组装示例)
 
 ---
 
@@ -120,15 +111,11 @@ body {
 
 /* 打印样式 */
 @media print {
-    html { scroll-snap-type: none !important; }
-    body { background: #fff; }
-    #deck > section, .deck-section {
-        min-height: auto !important;
-        page-break-after: always;
-    }
-    .page-number { display: none; }
-    .section-page { padding: 24px 20px; }
-    .no-print { display: none !important; }
+    body { background: white; }
+    .card-light { break-inside: avoid; }
+    .section-divider { page-break-after: avoid; }
+    .editorial-module { page-break-inside: avoid; }
+    .dashboard-card { break-inside: avoid; }
 }
 
 /* 基础响应式 */
@@ -156,33 +143,69 @@ body {
 
 ## 3. 布局模式
 
-### 3A. Deck 模式（幻灯片翻页）
+### 3A. Editorial 模式（长滚动，推荐）
+
+**适用场景**：报告、分析、复盘、方案展示、产品介绍、长文档
 
 ```css
-html.deck-mode { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+.editorial-page {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
 
-.deck-mode #deck > section {
-    min-height: 100vh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    overflow-y: auto;
-    position: relative;
+.editorial-hero {
+    padding: 80px 0 48px;
+    text-align: center;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 48px;
+}
+
+.editorial-module {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--ink-100);
+}
+.editorial-module:last-of-type {
+    border-bottom: none;
+}
+
+.editorial-footer {
+    padding: 48px 0;
+    text-align: center;
+    border-top: 1px solid var(--card-border);
+    margin-top: 32px;
 }
 ```
 
 HTML 骨架：
 ```html
-<html class="deck-mode">
 <body>
-<div id="deck">
-    <section class="cover">...</section>
-    <section class="section-page">...</section>
-    <section class="section-page cta-section">...</section>
+<div class="editorial-page">
+    <div class="editorial-hero">
+        <h1>页面标题</h1>
+        <p class="subtitle">副标题或摘要</p>
+    </div>
+    <div class="editorial-module">
+        <h2>章节标题</h2>
+        <div class="section-divider"></div>
+        <p>内容...</p>
+    </div>
+    <div class="editorial-module">
+        <h2>章节标题</h2>
+        <div class="section-divider"></div>
+        <div class="grid-2">
+            <div class="card-light">...</div>
+            <div class="card-light">...</div>
+        </div>
+    </div>
+    <div class="editorial-footer">
+        <p>总结或行动号召</p>
+    </div>
 </div>
 </body>
 ```
 
-### 3B. Editorial 模式（长滚动）
+### 3B. Dashboard 模式（看板）
 
 ```css
 .editorial-page {
@@ -226,7 +249,9 @@ HTML 骨架：
 </body>
 ```
 
-### 3C. Dashboard 模式（看板）
+### 3B. Dashboard 模式（看板）
+
+**适用场景**：数据汇总、状态监控、多维对比、经营摘要
 
 ```css
 .dashboard-page {
@@ -379,7 +404,9 @@ HTML 骨架：
 </body>
 ```
 
-### 3D. Single 模式（单页海报）
+### 3C. Single 模式（单页）
+
+**适用场景**：活动公告、单页简介、邀请函、单一主题
 
 ```css
 .single-page {
@@ -556,381 +583,6 @@ HTML 骨架：
 
 ---
 
-## 11. 封面
-
-```css
-.cover {
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    padding: 60px 40px; background: var(--base-50);
-    position: relative; text-align: center;
-}
-.cover-inner {
-    position: relative; z-index: 1; max-width: 680px;
-}
-.cover-brand {
-    width: 56px; height: 56px; border-radius: 16px;
-    background: linear-gradient(135deg, var(--lavender-500), var(--rose-500));
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 48px;
-    box-shadow: 0 4px 20px rgba(167,139,218,0.3);
-    color: #fff; font-size: 24px;
-}
-.cover-tag {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px; font-weight: 700;
-    letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--lavender-500); margin-bottom: 20px;
-}
-.cover h1, .cover-title {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 44px; font-weight: 900;
-    line-height: 1.3; margin-bottom: 20px;
-}
-.cover-sub {
-    font-size: 18px; color: var(--ink-500); margin-bottom: 36px;
-}
-.cover-meta {
-    display: flex; align-items: center; justify-content: center;
-    gap: 12px; font-size: 13px; color: var(--ink-400);
-}
-.cover-meta .dot {
-    width: 4px; height: 4px; border-radius: 50%; background: var(--ink-300);
-}
-```
-
-HTML：
-```html
-<section class="cover">
-    <div class="bg-dot" style="position:absolute;inset:0;z-index:0;"></div>
-    <div class="cover-inner">
-        <div class="cover-brand"><i class="fa-solid fa-某图标"></i></div>
-        <p class="cover-tag">ENGLISH TAGLINE</p>
-        <h1>中文主标题<br><span class="gt-rose">强调部分</span></h1>
-        <p class="cover-sub">一句话副标题描述</p>
-        <div class="cover-meta">
-            <span>公司名</span><span class="dot"></span><span>2026</span>
-        </div>
-    </div>
-    <span class="page-number">1 / N</span>
-</section>
-```
-
----
-
-## 12. 章节 Header
-
-```css
-.section-header { margin-bottom: 24px; }
-.section-tag {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px; font-weight: 700;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
-}
-.section-title {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 32px; font-weight: 900;
-    line-height: 1.35; margin-bottom: 10px;
-}
-.section-desc {
-    font-size: 14px; color: var(--ink-500);
-    line-height: 1.8; max-width: 680px;
-}
-```
-
-HTML：
-```html
-<div class="section-header">
-    <p class="section-tag" style="color: var(--某色-500);">
-        <i class="fa-solid fa-某图标"></i> ENGLISH NAME
-    </p>
-    <h2 class="section-title">中文标题<br><span class="gt-某色">强调部分</span></h2>
-    <p class="section-desc">说明文字。</p>
-    <div class="section-divider 某色" style="margin-top: 14px;"></div>
-</div>
-```
-
----
-
-## 13. 团队 + 时间线
-
-```css
-.about-grid {
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
-}
-.team-grid {
-    grid-column: span 2;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-}
-.team-card { border-radius: 14px; padding: 20px; text-align: center; }
-.team-avatar {
-    width: 48px; height: 48px; border-radius: 50%;
-    margin: 0 auto 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; font-weight: 800;
-}
-.team-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-.team-role {
-    display: inline-block; font-size: 11px; font-weight: 700;
-    padding: 2px 8px; border-radius: 4px; margin-bottom: 6px;
-}
-.team-desc { font-size: 12px; color: var(--ink-500); line-height: 1.6; }
-
-.timeline-panel { border-radius: 14px; padding: 20px; }
-.tl-item { display: flex; gap: 12px; }
-.tl-line { display: flex; flex-direction: column; align-items: center; width: 16px; }
-.tl-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    border: 2px solid; background: #fff; z-index: 1;
-}
-.tl-connector { width: 2px; flex: 1; min-height: 16px; }
-.tl-content { padding-bottom: 16px; flex: 1; }
-.tl-date { font-size: 11px; font-weight: 600; margin-bottom: 2px; }
-.tl-heading { font-size: 14px; font-weight: 800; margin-bottom: 4px; }
-.tl-tag {
-    font-size: 10px; font-weight: 600;
-    padding: 1px 6px; border-radius: 4px;
-}
-.tl-item:last-child .tl-connector { display: none; }
-```
-
----
-
-## 14. 挑战模板
-
-```css
-.challenge-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 14px; margin-bottom: 20px;
-}
-.challenge-card {
-    border-radius: 14px; padding: 20px 22px;
-    display: flex; gap: 16px; align-items: flex-start;
-}
-.challenge-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-.challenge-desc { font-size: 13px; color: var(--ink-500); line-height: 1.7; }
-
-.highlight-bar {
-    border-radius: 14px; padding: 18px 28px;
-    text-align: center; font-size: 14px; line-height: 1.8;
-}
-```
-
----
-
-## 15. 三层架构
-
-```css
-.arch-stack { display: flex; flex-direction: column; gap: 14px; }
-.arch-layer { border-radius: 16px; padding: 20px 24px; }
-.arch-layer-header {
-    display: flex; align-items: center;
-    justify-content: space-between; margin-bottom: 12px;
-}
-.arch-layer-title {
-    font-size: 15px; font-weight: 800;
-    display: flex; align-items: center; gap: 8px;
-}
-.arch-items {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-}
-.arch-item {
-    border-radius: 10px; padding: 12px 14px;
-    display: flex; align-items: center; gap: 10px;
-}
-.arch-item-icon {
-    width: 28px; height: 28px; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px;
-}
-```
-
-左侧彩色边线：`border-left: 3px solid var(--某色-500)`
-
----
-
-## 16. 数据统计
-
-```css
-.stats-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 14px; margin-bottom: 18px;
-}
-.stat-card { border-radius: 14px; padding: 24px; text-align: center; }
-.stat-number {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 42px; font-weight: 700; line-height: 1.1;
-    letter-spacing: -0.02em;
-}
-.stat-unit { font-size: 18px; font-weight: 400; margin-left: 2px; }
-.stat-label { font-size: 13px; color: var(--ink-500); margin-top: 4px; }
-```
-
----
-
-## 17. 能力矩阵
-
-```css
-.cap-top {
-    display: grid; grid-template-columns: repeat(5, 1fr);
-    gap: 10px; margin-bottom: 16px;
-}
-.cap-card { border-radius: 12px; padding: 16px 14px; }
-.cap-card h4 { font-size: 14px; font-weight: 800; margin-top: 10px; }
-.cap-card p { font-size: 12px; color: var(--ink-500); line-height: 1.6; }
-
-.cap-bottom {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-}
-.cap-bottom-card { border-radius: 12px; padding: 18px; }
-```
-
----
-
-## 18. 场景目录
-
-```css
-.catalog-group { margin-bottom: 14px; }
-.catalog-header {
-    display: flex; align-items: center; gap: 8px;
-    padding-bottom: 6px; border-bottom: 1px solid var(--ink-100);
-    margin-bottom: 8px;
-}
-.catalog-header-icon {
-    width: 22px; height: 22px; border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px;
-}
-.catalog-header-name { font-size: 13px; font-weight: 700; flex: 1; }
-.catalog-header-count { font-size: 12px; font-weight: 600; color: var(--ink-400); }
-
-.catalog-items {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-}
-.catalog-item {
-    border-radius: 10px; padding: 10px 14px;
-    display: flex; align-items: center; gap: 10px;
-}
-.catalog-item-body h5 {
-    font-size: 12px; font-weight: 700;
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-.catalog-item-body p {
-    font-size: 10px; color: var(--ink-400);
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-```
-
----
-
-## 19. 旅程/流程
-
-```css
-.journey-formula {
-    display: flex; align-items: center; justify-content: center;
-    gap: 16px; padding: 20px; border-radius: 16px;
-}
-.formula-circle {
-    width: 52px; height: 52px; border-radius: 50%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center; font-size: 20px;
-}
-.formula-circle span { font-size: 10px; font-weight: 600; margin-top: 2px; }
-.formula-op { font-size: 24px; font-weight: 300; color: var(--ink-400); }
-
-.journey-steps {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 12px; margin-bottom: 20px;
-}
-.journey-step { border-radius: 14px; padding: 20px; }
-.journey-step h4 {
-    font-size: 15px; font-weight: 800; margin-bottom: 8px;
-    display: flex; align-items: center; gap: 8px;
-}
-.journey-step p { font-size: 12px; color: var(--ink-500); line-height: 1.7; }
-
-.value-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-}
-.value-card {
-    border-radius: 14px; padding: 20px; text-align: center;
-}
-.value-card i { font-size: 24px; margin-bottom: 10px; }
-.value-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-.value-card p { font-size: 12px; color: var(--ink-500); line-height: 1.7; }
-```
-
----
-
-## 20. 深色段
-
-```css
-.dark-section {
-    background: linear-gradient(135deg, #1a1a2e, #23224a);
-    color: #e0dff0;
-}
-.dark-section .section-title { color: #f0efe8; }
-.dark-section .section-desc { color: #a09eb8; }
-.dark-section .page-number { color: #5a5470; }
-
-.milestone-item { text-align: center; }
-.milestone-icon {
-    width: 48px; height: 48px; border-radius: 50%;
-    margin: 0 auto 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-}
-
-.dark-card {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px; padding: 16px; text-align: center;
-}
-.dark-card h4 { font-size: 14px; font-weight: 700; color: #f0efe8; }
-.dark-card p { font-size: 12px; color: #908ea8; line-height: 1.6; }
-
-.gold-cards {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-}
-.gold-card {
-    background: linear-gradient(135deg, rgba(228,197,106,0.12), rgba(228,197,106,0.04));
-    border: 1px solid rgba(228,197,106,0.2);
-    border-radius: 10px; padding: 14px;
-}
-.gold-card h5 { font-size: 13px; font-weight: 700; color: #f0efe8; }
-
-.dark-milestone {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 12px; margin-bottom: 20px;
-}
-```
-
----
-
-## 21. 结束页
-
-```css
-.cta-section {
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    text-align: center; padding: 60px 40px;
-}
-.cta-section h2 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 36px; font-weight: 900; margin-bottom: 14px;
-}
-.cta-section p {
-    font-size: 16px; color: var(--ink-500); margin-bottom: 32px;
-}
-.cta-box {
-    border-radius: 16px; padding: 32px;
-    display: flex; align-items: center; gap: 20px;
-}
-```
-
----
-
 ## 22. Dashboard 看板组件
 
 以下是 Dashboard 模式专用的扩展组件。
@@ -1085,34 +737,56 @@ HTML：
 .emphasis-bar strong { font-weight: 700; }
 ```
 
+
 ---
 
-## 25. 组装示例
+## 14. 组装示例
 
-### Deck 模式骨架
+### Editorial 模式骨架（推荐）
 
 ```html
 <!DOCTYPE html>
-<html lang="zh-CN" class="deck-mode">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>方案标题</title>
+    <title>报告标题</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 粘贴 CSS 变量 */
-        /* 粘贴全局样式 */
-        /* 粘贴 Deck 模式样式 */
-        /* 粘贴所需组件 CSS */
+        /* 粘贴 CSS 变量 + 全局样式 + Editorial 样式 + 所需组件 */
     </style>
 </head>
 <body>
-<div id="deck">
-    <section class="cover"><!-- 封面 --></section>
-    <section class="section-page"><!-- 内容页 --></section>
-    <section class="section-page dark-section"><!-- 深色页 --></section>
-    <section class="section-page cta-section"><!-- 结束页 --></section>
+<div class="editorial-page">
+    <div class="editorial-hero">
+        <h1>报告标题</h1>
+        <p class="subtitle">副标题或摘要</p>
+    </div>
+    <div class="editorial-module">
+        <h2>章节一</h2>
+        <div class="section-divider"></div>
+        <div class="editorial-body">
+            <p>正文内容...</p>
+        </div>
+    </div>
+    <div class="editorial-module">
+        <h2>章节二</h2>
+        <div class="section-divider"></div>
+        <div class="grid-2">
+            <div class="card-light" style="padding: 24px; border-radius: 14px;">
+                <h3>卡片标题</h3>
+                <p>卡片内容</p>
+            </div>
+            <div class="card-light" style="padding: 24px; border-radius: 14px;">
+                <h3>卡片标题</h3>
+                <p>卡片内容</p>
+            </div>
+        </div>
+    </div>
+    <div class="editorial-footer">
+        <p style="color: var(--ink-400); font-size: 13px;">总结或行动号召</p>
+    </div>
 </div>
 </body>
 </html>
@@ -1136,21 +810,30 @@ HTML：
 <body>
 <div class="dashboard-page">
     <div class="dashboard-header">
-        <h1>标题</h1>
+        <h1>看板标题</h1>
+        <span class="badge" style="background: var(--mint-100); color: var(--mint-500);">运行中</span>
+    </div>
+    <div class="dashboard-status-bar">
+        <div class="status-chip" style="background: var(--mint-50);">
+            <span class="status-dot" style="background: var(--mint-500);"></span>
+            <span>正常</span>
+        </div>
     </div>
     <div class="dashboard-grid cols-4">
-        <div class="metric-card">...</div>
-    </div>
-    <div class="dashboard-grid cols-2" style="margin-top:16px;">
-        <div class="dashboard-card">...</div>
-        <div class="dashboard-card">...</div>
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <span class="dashboard-card-title">指标名称</span>
+            </div>
+            <div class="summary-value">1,234</div>
+            <div class="summary-label">单位</div>
+        </div>
     </div>
 </div>
 </body>
 </html>
 ```
 
-### Editorial 模式骨架
+### Single 模式骨架
 
 ```html
 <!DOCTYPE html>
@@ -1158,31 +841,26 @@ HTML：
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>报告标题</title>
+    <title>单页标题</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 粘贴 CSS 变量 + 全局样式 + Editorial 样式 + 所需组件 */
+        /* 粘贴 CSS 变量 + 全局样式 + Single 样式 + 所需组件 */
     </style>
 </head>
 <body>
-<div class="editorial-page">
-    <div class="editorial-hero">
-        <p class="section-tag" style="color: var(--lavender-500); justify-content: center;">REPORT</p>
-        <h1 class="section-title">报告标题</h1>
-        <p class="section-desc" style="margin: 0 auto;">摘要描述</p>
-    </div>
-    <div class="editorial-module editorial-body">
-        <h3>章节一</h3>
-        <p>正文内容...</p>
-    </div>
-    <div class="editorial-footer">
-        <p style="color: var(--ink-400); font-size: 13px;">底部信息</p>
+<div class="single-page">
+    <div class="single-inner">
+        <h1 style="font-family: 'Noto Serif SC', serif; font-size: 42px; font-weight: 900; margin-bottom: 20px;">单页标题</h1>
+        <p style="font-size: 16px; color: var(--ink-500); line-height: 1.8;">内容描述</p>
     </div>
 </div>
 </body>
 </html>
 ```
 
-根据用户需求选择布局模式和模板页面，不必全部使用。
-Deck 模式最少 3 页（封面 + 内容 + 结束），其他模式按需组装。
+**使用说明**：
+- Editorial 模式：适合 80% 的场景，长滚动阅读，章节清晰
+- Dashboard 模式：适合数据汇总和状态监控
+- Single 模式：适合信息量少的单页展示
+- 所有模式均无动画效果，打印友好
