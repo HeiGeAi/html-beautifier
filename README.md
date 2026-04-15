@@ -18,7 +18,7 @@
 
 ## 这是什么？What is this?
 
-一个为 Claude Code 设计的 HTML 美化 skill，能将任何输入内容（文本、Markdown、数据、报告）转换为高品质的视觉化 HTML 页面。
+一个跨平台通用的 HTML 美化 skill，能将任何输入内容（文本、Markdown、数据、报告）转换为高品质的视觉化 HTML 页面。
 
 **不是**简单的 Markdown 转 HTML 工具，而是一套完整的视觉设计系统：
 - ✅ 四种专业布局模式（幻灯片/长滚动/看板/单页）
@@ -26,8 +26,11 @@
 - ✅ 生成前与用户确认风格和场景
 - ✅ 支持参考学习现有网页并创新
 - ✅ 纯静态单文件输出，零依赖
+- ✅ 适配所有主流 AI 编程助手
 
 **适用场景**：方案展示、数据报告、产品介绍、PPT 替代、内容可视化、活动海报
+
+**支持平台**：Claude Code、Cursor、Windsurf、Cline、Aider、OpenClaw、Hermes、ChatGPT、Claude.ai 等
 
 ---
 
@@ -49,6 +52,7 @@
 2. **多模式智能选择**：根据内容特征自动推荐最合适的布局
 3. **参考学习能力**：能从现有网页提炼精髓并用自己的设计语言重构
 4. **专业级输出**：完整的设计系统（配色、字体、组件、模板）
+5. **跨平台兼容**：适配所有主流 AI 编程助手，不限于特定工具
 
 ---
 
@@ -111,39 +115,93 @@
 # 1. 下载 skill 文件
 curl -O https://github.com/HeiGeAi/html-beautifier/releases/latest/download/html-beautifier.skill
 
-# 2. 在 Claude Code 中安装
-# 将 html-beautifier.skill 放到 ~/.claude/skills/ 目录
+# 2. 根据你使用的平台安装
+# Claude Code / Cursor / Windsurf / Cline:
+mkdir -p ~/.claude/skills
+cp html-beautifier.skill ~/.claude/skills/
+
+# ChatGPT / Claude.ai / 其他平台:
+# 直接将 SKILL.md 内容作为 system prompt 或自定义指令使用
 
 # 3. 使用
-# 在 Claude Code 中输入：
+# 在 AI 助手中输入：
+把这个报告做成网页
+```
+
+### 平台安装指南
+
+#### 方法 1：支持 Skill 系统的平台（推荐）
+
+**适用于**：Claude Code、Cursor、Windsurf、Cline
+
+```bash
+# 下载并安装
+mkdir -p ~/.claude/skills
+curl -L https://github.com/HeiGeAi/html-beautifier/releases/latest/download/html-beautifier.skill \
+  -o ~/.claude/skills/html-beautifier.skill
+
+# 使用
 /html-beautifier 把这个报告做成网页
+```
+
+#### 方法 2：作为 System Prompt 使用
+
+**适用于**：ChatGPT、Claude.ai、Aider、OpenClaw、Hermes
+
+1. 下载本仓库的 `SKILL.md` 文件
+2. 将内容复制到 AI 助手的 system prompt 或自定义指令中
+3. 直接对话使用，无需特殊命令
+
+**ChatGPT 设置方法**：
+- 进入 Settings → Personalization → Custom instructions
+- 将 SKILL.md 内容粘贴到 "How would you like ChatGPT to respond?" 区域
+
+**Claude.ai 使用方法**：
+- 在对话开始时粘贴 SKILL.md 内容
+- 或使用 Projects 功能将其设为项目知识库
+
+#### 方法 3：从源码安装
+
+```bash
+# 克隆仓库
+git clone https://github.com/HeiGeAi/html-beautifier.git
+cd html-beautifier
+
+# 打包 skill
+tar -czf html-beautifier.skill SKILL.md references/
+
+# 安装（根据平台选择）
+cp html-beautifier.skill ~/.claude/skills/  # Claude Code 等
+# 或直接使用 SKILL.md 作为 prompt
 ```
 
 ### 最短路径
 
-1. **安装 skill**
-   ```bash
-   mkdir -p ~/.claude/skills
-   cp html-beautifier.skill ~/.claude/skills/
-   ```
-
-2. **准备内容**
+1. **准备内容**
    - 直接提供文本内容
    - 或指定文件路径（.txt, .md, .csv, .json 等）
    - 或提供参考网页 URL
 
-3. **调用 skill**
+2. **调用 skill**
+   
+   **Claude Code / Cursor / Windsurf / Cline**:
    ```
    /html-beautifier 把这个季度报告做成网页
    ```
+   
+   **ChatGPT / Claude.ai / 其他平台**:
+   ```
+   把这个季度报告做成网页（使用 HTML Beautifier 系统）
+   ```
 
-4. **确认风格**
+3. **确认风格**
    - AI 会询问使用场景（方案展示/数据报告/看板/海报）
    - 选择视觉风格（商务专业/活力创意/简约优雅）
    - 是否需要参考现有网页
 
-5. **获取输出**
-   - 单文件 HTML 保存到桌面 claudecode 输出文件夹
+4. **获取输出**
+   - **支持文件写入的平台**：HTML 自动保存到指定位置
+   - **不支持文件写入的平台**：复制代码块内容，手动保存为 .html 文件
    - 可直接打开、打印、截图或分享
 
 ---
@@ -154,12 +212,19 @@ curl -O https://github.com/HeiGeAi/html-beautifier/releases/latest/download/html
 
 #### 场景 1：将 Markdown 文件美化为 HTML
 
+**Claude Code / Cursor / Windsurf / Cline**:
 ```
 /html-beautifier 把 project-report.md 做成网页
 ```
 
+**ChatGPT / Claude.ai**:
+```
+把 project-report.md 的内容做成网页
+[粘贴文件内容]
+```
+
 AI 会：
-1. 读取文件内容
+1. 读取/分析文件内容
 2. 询问使用场景（建议选"数据报告"）
 3. 询问视觉风格（建议选"商务专业"）
 4. 自动选择 Editorial 或 Dashboard 模式
@@ -167,8 +232,9 @@ AI 会：
 
 #### 场景 2：制作产品介绍幻灯片
 
+**所有平台通用**:
 ```
-/html-beautifier 把这段产品介绍做成 PPT 风格的网页：
+把这段产品介绍做成 PPT 风格的网页：
 [粘贴产品介绍文本]
 ```
 
@@ -180,9 +246,17 @@ AI 会：
 
 #### 场景 3：参考学习现有网页
 
+**支持网页抓取的平台**:
 ```
-/html-beautifier 参考 https://example.com 的设计风格，
+参考 https://example.com 的设计风格，
 把我们的公司介绍做成更好看的版本
+```
+
+**不支持网页抓取的平台**:
+```
+参考这个网页的设计风格（见截图/描述），
+把我们的公司介绍做成更好看的版本
+[提供网页截图或设计描述]
 ```
 
 AI 会：
@@ -195,16 +269,17 @@ AI 会：
 
 #### 自定义风格组合
 
+**所有平台通用**:
 ```
-/html-beautifier 
 场景：数据看板
 风格：活力创意
 内容：[粘贴数据]
 要求：使用 Dashboard 模式，突出关键指标
 ```
 
-#### 批量生成
+#### 批量生成（仅支持文件系统的平台）
 
+**Claude Code / Cursor / Windsurf / Cline**:
 ```bash
 # 为多个 Markdown 文件生成 HTML
 for file in reports/*.md; do
@@ -212,13 +287,55 @@ for file in reports/*.md; do
 done
 ```
 
+**Aider**:
+```bash
+# 使用 aider 批量处理
+for file in reports/*.md; do
+  aider --message "把 $file 做成网页（使用 HTML Beautifier）"
+done
+```
+
+---
+
+## 平台兼容性 Platform Compatibility
+
+### 完全支持（推荐）✅
+
+| 平台 | 文件读写 | 用户交互 | 网页抓取 | 安装方式 |
+|------|---------|---------|---------|---------|
+| **Claude Code** | ✅ | ✅ | ✅ | .skill 文件 |
+| **Cursor** | ✅ | ✅ | ✅ | .skill 文件 |
+| **Windsurf** | ✅ | ✅ | ✅ | .skill 文件 |
+| **Cline** | ✅ | ✅ | ⚠️ | .skill 文件 |
+
+### 基础支持 ⚠️
+
+| 平台 | 文件读写 | 用户交互 | 网页抓取 | 安装方式 |
+|------|---------|---------|---------|---------|
+| **Aider** | ✅ | ⚠️ | ❌ | System prompt |
+| **OpenClaw** | ✅ | ⚠️ | ❌ | System prompt |
+| **Hermes** | ✅ | ⚠️ | ❌ | System prompt |
+
+### 手动模式 📝
+
+| 平台 | 文件读写 | 用户交互 | 网页抓取 | 安装方式 |
+|------|---------|---------|---------|---------|
+| **ChatGPT** | ❌ | ✅ | ❌ | Custom instructions |
+| **Claude.ai** | ❌ | ✅ | ❌ | Projects / Prompt |
+| **其他 AI** | ❌ | ✅ | ❌ | System prompt |
+
+**图例**：
+- ✅ 完全支持
+- ⚠️ 部分支持（需要文本交互）
+- ❌ 不支持（需要手动操作）
+
 ---
 
 ## 项目结构 Project Structure
 
 ```
 html-beautifier/
-├── SKILL.md                    # Skill 主文件（Claude Code 读取）
+├── SKILL.md                    # Skill 主文件（AI 助手读取）
 ├── references/                 # 参考文档
 │   ├── design-system.md       # 完整 CSS 组件库和设计系统
 │   ├── visual-learning-guide.md # 视觉学习指南

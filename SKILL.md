@@ -8,6 +8,8 @@ description: >
   "参考某网页做更美版本"、"把报告做成网页"时，必须使用此 skill。
   在生成前会与用户确认风格偏好和使用场景，确保输出符合需求。
 author: Blake 黑哥
+version: 1.0.0
+compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "OpenClaw", "Hermes", "ChatGPT", "Claude.ai", "通用 AI 助手"]
 ---
 
 # HTML Beautifier（多功能 HTML 美化系统）
@@ -33,9 +35,14 @@ author: Blake 黑哥
 2. 读取用户指定的文件（.txt, .md, .csv, .json 等）
 3. 参考现有网页（URL 或本地 HTML）进行学习和创新
 
+**平台适配说明**：
+- 如果你的平台支持文件读取工具，直接读取用户指定的文件
+- 如果不支持，请要求用户粘贴文件内容或提供文本
+- 如果支持网页抓取，可以直接获取参考 URL 的内容
+
 ### 第二步：与用户确认风格和场景
 
-在开始制作前，必须通过 AskUserQuestion 工具询问用户：
+在开始制作前，必须询问用户以下问题（根据平台能力选择合适的交互方式）：
 
 **问题 1：使用场景是什么？**
 选项：
@@ -56,6 +63,11 @@ author: Blake 黑哥
 选项：
 - 不需要，直接生成
 - 需要，我会提供参考 URL 或本地 HTML 文件
+
+**平台适配说明**：
+- Claude Code/Cursor/Windsurf：使用 AskUserQuestion 工具或直接询问
+- ChatGPT/Claude.ai：直接以文本形式询问用户
+- 其他平台：根据平台特性选择最合适的交互方式
 
 ### 第三步：选择布局模式
 
@@ -83,18 +95,23 @@ author: Blake 黑哥
 
 ### 第四步：生成 HTML
 
-1. 读取 `references/design-system.md` 获取完整 CSS 组件代码
+1. 读取本 skill 附带的 `references/design-system.md` 获取完整 CSS 组件代码
 2. 如果是参考学习场景，读取 `references/visual-learning-guide.md`
 3. 根据选定的布局模式和风格，组装页面
 4. 进行视觉自检（参考 `references/quality-checklist.md`）
-5. 输出到桌面 claudecode 输出文件夹
+5. 输出 HTML 文件
+
+**平台适配说明**：
+- 如果平台支持文件写入，直接保存到用户指定位置或默认输出目录
+- 如果不支持文件写入，将完整 HTML 代码以代码块形式输出给用户
+- 建议文件名格式：`beautified-[场景]-[日期].html`（如 `beautified-deck-20240415.html`）
 
 ### 第五步：交付说明
 
 交付时简要说明：
 - 采用了哪种布局模式，为什么
 - 页面包含哪些核心模块
-- 文件保存位置
+- 文件保存位置（如果支持文件写入）
 - 1-2 个可选的优化方向（如果用户需要调整）
 
 ## 四种布局模式详解
@@ -214,7 +231,6 @@ author: Blake 黑哥
 - 外部依赖仅限 Google Fonts CDN + Font Awesome CDN
 - 不依赖任何 JavaScript 框架或库
 - 所有内容默认可见，无需用户操作
-- 文件默认保存到桌面 claudecode 输出文件夹
 - 包含 `@media print` 样式，确保打印效果正确
 - 包含基础响应式样式（`@media max-width: 1024px`）
 
@@ -233,6 +249,42 @@ author: Blake 黑哥
 - 参考学习流程 + 视觉拆解方法：`references/visual-learning-guide.md`
 - 质量验收清单：`references/quality-checklist.md`
 
+## 平台兼容性说明
+
+本 skill 设计为跨平台通用，适配以下 AI 编程助手：
+
+### 完全支持（推荐）
+- **Claude Code**：原生支持，可使用所有工具（AskUserQuestion、文件读写等）
+- **Cursor**：支持文件操作和用户交互
+- **Windsurf**：支持文件操作和用户交互
+- **Cline**：支持文件操作
+
+### 基础支持
+- **Aider**：支持文件读写，交互需通过文本对话
+- **OpenClaw**：支持基础文件操作
+- **Hermes**：支持基础文件操作
+
+### 手动模式
+- **ChatGPT**：需要用户手动粘贴内容和保存输出
+- **Claude.ai**：需要用户手动粘贴内容和保存输出
+- **其他 AI 助手**：将 HTML 代码以代码块形式输出，用户手动保存
+
+### 使用建议
+
+1. **有文件系统访问权限的平台**：
+   - 直接读取用户指定的文件
+   - 自动保存 HTML 到合适的位置
+   - 可以读取 references/ 目录下的参考文档
+
+2. **无文件系统访问权限的平台**：
+   - 要求用户粘贴内容
+   - 将完整 HTML 以代码块形式输出
+   - 将 references/ 中的关键内容内联到 skill 中（见下方精简版）
+
+3. **网页抓取能力**：
+   - 如果平台支持 WebFetch 或类似工具，可以直接获取参考 URL
+   - 如果不支持，要求用户提供网页截图或描述
+
 ## 特殊说明
 
 本 skill 的核心价值在于：
@@ -240,5 +292,10 @@ author: Blake 黑哥
 2. **多模式支持**：一个 skill 覆盖所有 HTML 美化场景
 3. **参考学习能力**：能从现有网页学习并创新
 4. **专业级输出**：视觉品质接近专业设计师产出
+5. **跨平台兼容**：适配所有主流 AI 编程助手
 
 使用时请严格遵循"确认-生成-交付"三步流程，确保输出符合用户期望。
+
+---
+
+**Made with ❤️ by Blake 黑哥**
