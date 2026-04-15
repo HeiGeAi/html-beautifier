@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2024-04-15
+
+### Added
+- ✅ 跨平台兼容性支持（Cross-platform compatibility）
+- ✅ 支持 Claude Code, Cursor, Windsurf, Cline, Aider, OpenClaw, Hermes 等多平台
+- ✅ 多平台安装指南（Installation guides for multiple platforms）
+- ✅ 平台兼容性对比表格（Platform compatibility comparison table）
+- ✅ 手动模式支持 ChatGPT 和 Claude.ai（Manual mode for ChatGPT and Claude.ai）
+
+### Changed
+- 📝 更新 README 为双语格式（Updated README to bilingual format）
+- 📝 优化文档结构，参考 opc-team 项目风格（Optimized documentation structure）
+- 📝 添加详细的使用指南 USAGE.md（Added detailed usage guide）
+
+### Documentation
+- 新增 LICENSE 文件（MIT License）
+- 新增 .gitignore 配置
+- 新增 examples/ 目录和演示文件
+
 ## [1.0.0] - 2024-04-15
 
 ### Added
