@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Beautifier - 跨平台 HTML 美化系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 马卡龙六色 */
+            --rose-500: #e8889a;   --rose-100: #fdf0f3;   --rose-50: #fef7f8;
+            --rose-deep: #c45a65;
+            --mint-500: #6bc4a6;   --mint-100: #edf9f4;   --mint-50: #f5fcf9;
+            --mint-deep: #3d8e72;
+            --lavender-500: #a78bda; --lavender-100: #f3eefb; --lavender-50: #f9f6fd;
+            --lavender-deep: #6b4fa0;
+            --butter-500: #e4c56a; --butter-100: #fdf8e8; --butter-50: #fefcf3;
+            --butter-deep: #b89520;
+            --sky-500: #7ab4d9;    --sky-100: #edf5fb;    --sky-50: #f5f9fd;
+            --sky-deep: #3a7aaa;
+            --peach-500: #e8a87c;  --peach-100: #fdf3ec;  --peach-50: #fef9f5;
+            --peach-deep: #c47530;
+
+            /* 文字层级 */
+            --ink-900: #1a1a2e;
+            --ink-600: #4a4862;
+            --ink-500: #6b6880;
+            --ink-400: #908da3;
+            --ink-300: #b5b3c4;
+            --ink-100: #eceaf3;
+
+            /* 背景层级 */
+            --base-50: #fafbfc;
+            --base-100: #f1f0f5;
+
+            /* 卡片系统 */
+            --card-border: #e8e6ef;
+            --card-shadow: 0 1px 3px rgba(100,80,140,0.04), 0 4px 16px rgba(100,80,140,0.04);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', 'DM Sans', -apple-system, sans-serif;
+            color: var(--ink-900);
+            background: var(--base-50);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.75;
+            font-weight: 400;
+        }
+
+        /* Editorial 布局 */
+        .editorial-page {
+            max-width: 840px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .editorial-hero {
+            padding: 80px 0 48px;
+            text-align: center;
+            border-bottom: 1px solid var(--card-border);
+            margin-bottom: 48px;
+        }
+
+        .editorial-hero h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .editorial-hero .subtitle {
+            font-size: 18px;
+            color: var(--ink-500);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .editorial-module {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--ink-100);
+        }
+        .editorial-module:last-of-type {
+            border-bottom: none;
+        }
+
+        .editorial-module h2 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--ink-900);
+        }
+
+        .editorial-module h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 24px 0 12px;
+            color: var(--ink-900);
+        }
+
+        .editorial-footer {
+            padding: 48px 0;
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+            margin-top: 32px;
+        }
+
+        /* 渐变文字 */
+        .gt-lavender {
+            background: linear-gradient(135deg, var(--lavender-500), var(--lavender-deep));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gt-sky {
+            background: linear-gradient(135deg, var(--sky-500), var(--sky-deep));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gt-mint {
+            background: linear-gradient(135deg, var(--mint-500), var(--mint-deep));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 卡片 */
+        .card-light {
+            background: #fff;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .card-light h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--ink-900);
+        }
+
+        .card-light p {
+            font-size: 14px;
+            color: var(--ink-600);
+            line-height: 1.7;
+        }
+
+        /* section-divider */
+        .section-divider {
+            width: 48px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--lavender-500), var(--sky-500));
+            border-radius: 2px;
+            margin: 16px 0 24px;
+        }
+
+        /* badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        /* icon-box */
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        /* 网格 */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+        /* 工具类 */
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .gap-12 { gap: 12px; }
+        .mb-16 { margin-bottom: 16px; }
+        .mb-24 { margin-bottom: 24px; }
+        .text-center { text-align: center; }
+
+        /* 代码块样式 */
+        .code-block {
+            background: var(--ink-900);
+            color: #e8e6ef;
+            padding: 20px 24px;
+            border-radius: 12px;
+            font-family: 'DM Sans', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        .code-block code {
+            color: var(--mint-500);
+        }
+
+        /* 列表样式 */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            font-size: 15px;
+            color: var(--ink-600);
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--mint-500);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        /* 打印样式 */
+        @media print {
+            body { background: white; }
+            .card-light { break-inside: avoid; }
+            .editorial-module { page-break-inside: avoid; }
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .editorial-hero h1 { font-size: 36px; }
+            .editorial-module h2 { font-size: 26px; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="editorial-page">
+    <!-- Hero 首屏 -->
+    <div class="editorial-hero">
+        <h1><span class="gt-lavender">HTML Beautifier</span></h1>
+        <p class="subtitle">跨平台通用的 HTML 美化系统，将任何内容转换为专业级视觉化页面。<br>零动画、打印友好、所见即所得。</p>
+        <div style="margin-top: 24px;">
+            <span class="badge" style="background: var(--lavender-100); color: var(--lavender-500);">v1.2.0</span>
+            <span class="badge" style="background: var(--mint-100); color: var(--mint-500);">MIT License</span>
+            <span class="badge" style="background: var(--sky-100); color: var(--sky-500);">跨平台</span>
+        </div>
+    </div>
+
+    <!-- 核心特性 -->
+    <div class="editorial-module">
+        <h2>核心特性</h2>
+        <div class="section-divider"></div>
+
+        <h3>三种布局模式</h3>
+        <div class="grid-3 mb-24">
+            <div class="card-light">
+                <div class="icon-box" style="background: var(--lavender-100); color: var(--lavender-500);">
+                    <i class="fa-solid fa-scroll"></i>
+                </div>
+                <h4>Editorial</h4>
+                <p>长滚动阅读，适合报告、分析、方案展示。章节清晰，打印友好。</p>
+            </div>
+            <div class="card-light">
+                <div class="icon-box" style="background: var(--sky-100); color: var(--sky-500);">
+                    <i class="fa-solid fa-table-cells"></i>
+                </div>
+                <h4>Dashboard</h4>
+                <p>看板式布局，适合数据汇总、状态监控。信息密度高，一屏展示。</p>
+            </div>
+            <div class="card-light">
+                <div class="icon-box" style="background: var(--peach-100); color: var(--peach-500);">
+                    <i class="fa-solid fa-file"></i>
+                </div>
+                <h4>Single</h4>
+                <p>单页海报式，适合活动公告、单页简介。视觉冲击力强。</p>
+            </div>
+        </div>
+
+        <h3>马卡龙六色设计系统</h3>
+        <div class="grid-2 mb-24">
+            <div class="card-light">
+                <div class="flex items-center gap-12 mb-16">
+                    <div style="width: 32px; height: 32px; background: var(--rose-500); border-radius: 8px;"></div>
+                    <div>
+                        <h4 style="margin: 0;">玫瑰粉</h4>
+                        <p style="margin: 0; font-size: 12px; color: var(--ink-400);">#e8889a</p>
+                    </div>
+                </div>
+                <p>强调、警示</p>
+            </div>
+            <div class="card-light">
+                <div class="flex items-center gap-12 mb-16">
+                    <div style="width: 32px; height: 32px; background: var(--mint-500); border-radius: 8px;"></div>
+                    <div>
+                        <h4 style="margin: 0;">薄荷绿</h4>
+                        <p style="margin: 0; font-size: 12px; color: var(--ink-400);">#6bc4a6</p>
+                    </div>
+                </div>
+                <p>正向、完成</p>
+            </div>
+            <div class="card-light">
+                <div class="flex items-center gap-12 mb-16">
+                    <div style="width: 32px; height: 32px; background: var(--lavender-500); border-radius: 8px;"></div>
+                    <div>
+                        <h4 style="margin: 0;">薰衣草</h4>
+                        <p style="margin: 0; font-size: 12px; color: var(--ink-400);">#a78bda</p>
+                    </div>
+                </div>
+                <p>品牌、引导</p>
+            </div>
+            <div class="card-light">
+                <div class="flex items-center gap-12 mb-16">
+                    <div style="width: 32px; height: 32px; background: var(--butter-500); border-radius: 8px;"></div>
+                    <div>
+                        <h4 style="margin: 0;">奶油黄</h4>
+                        <p style="margin: 0; font-size: 12px; color: var(--ink-400);">#e4c56a</p>
+                    </div>
+                </div>
+                <p>提醒、金色调</p>
+            </div>
+            <div class="card-light">
+                <div class="flex items-center gap-12 mb-16">
+                    <div style="width: 32px; height: 32px; background: var(--sky-500); border-radius: 8px;"></div>
+                    <div>
+                        <h4 style="margin: 0;">天空蓝</h4>
+                        <p style="margin: 0; font-size: 12px; color: var(--ink-400);">#7ab4d9</p>
+                    </div>
+                </div>
+                <p>信息、数据</p>
+            </div>
+            <div class="card-light">
+                <div class="flex items-center gap-12 mb-16">
+                    <div style="width: 32px; height: 32px; background: var(--peach-500); border-radius: 8px;"></div>
+                    <div>
+                        <h4 style="margin: 0;">蜜桃橙</h4>
+                        <p style="margin: 0; font-size: 12px; color: var(--ink-400);">#e8a87c</p>
+                    </div>
+                </div>
+                <p>温暖、活力</p>
+            </div>
+        </div>
+
+        <h3>核心组件</h3>
+        <ul class="feature-list">
+            <li><strong>card-light</strong> - 白底卡片，万能信息容器</li>
+            <li><strong>gt-渐变文字</strong> - 标题强调词渐变色</li>
+            <li><strong>section-divider</strong> - 章节标题下方渐变短线</li>
+            <li><strong>badge</strong> - 药丸标签，分类标识</li>
+            <li><strong>num-dot</strong> - 编号圆点，列表序号</li>
+            <li><strong>icon-box</strong> - 方形圆角图标框</li>
+        </ul>
+    </div>
+
+    <!-- 使用方式 -->
+    <div class="editorial-module">
+        <h2>使用方式</h2>
+        <div class="section-divider"></div>
+
+        <h3>快速开始</h3>
+        <div class="code-block">
+/html-beautifier 把这个报告做成网页
+        </div>
+
+        <h3>安装方法</h3>
+        <div class="code-block">
+mkdir -p ~/.claude/skills
+curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.0/html-beautifier.skill \
+  -o ~/.claude/skills/html-beautifier.skill
+        </div>
+    </div>
+
+    <!-- 支持平台 -->
+    <div class="editorial-module">
+        <h2>支持平台</h2>
+        <div class="section-divider"></div>
+
+        <div class="grid-3">
+            <div>
+                <h3 style="font-size: 18px; margin-top: 0;">完全支持 <span class="gt-mint">✓</span></h3>
+                <ul class="feature-list" style="margin-top: 12px;">
+                    <li>Claude Code</li>
+                    <li>Cursor</li>
+                    <li>Windsurf</li>
+                    <li>Cline</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="font-size: 18px; margin-top: 0;">基础支持 <span class="gt-sky">⚠</span></h3>
+                <ul class="feature-list" style="margin-top: 12px;">
+                    <li>Aider</li>
+                    <li>OpenClaw</li>
+                    <li>Hermes</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="font-size: 18px; margin-top: 0;">手动模式 <span style="color: var(--ink-400);">📝</span></h3>
+                <ul class="feature-list" style="margin-top: 12px;">
+                    <li>ChatGPT</li>
+                    <li>Claude.ai</li>
+                    <li>其他 AI 助手</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设计理念 -->
+    <div class="editorial-module">
+        <h2>设计理念</h2>
+        <div class="section-divider"></div>
+
+        <div class="card-light" style="background: var(--lavender-50); border-color: var(--lavender-100); padding: 32px; text-align: center;">
+            <p style="font-size: 20px; font-weight: 600; color: var(--ink-900); line-height: 1.8; margin: 0;">
+                「卡片即信息容器，留白即呼吸感，节奏即叙事力」
+            </p>
+        </div>
+
+        <p style="margin-top: 24px; font-size: 15px; color: var(--ink-600); line-height: 1.8;">
+            所有内容通过精心设计的卡片、标签、图标组合来承载，不堆砌文字。每一个模块都是一张完整的视觉海报，有清晰的信息层次。
+        </p>
+    </div>
+
+    <!-- 输出特点 -->
+    <div class="editorial-module">
+        <h2>输出特点</h2>
+        <div class="section-divider"></div>
+
+        <div class="grid-2">
+            <div class="card-light">
+                <div class="icon-box" style="background: var(--mint-100); color: var(--mint-500);">
+                    <i class="fa-solid fa-file-code"></i>
+                </div>
+                <h4>单文件输出</h4>
+                <p>所有 CSS 内联，零依赖（仅 CDN 字体和图标）</p>
+            </div>
+            <div class="card-light">
+                <div class="icon-box" style="background: var(--sky-100); color: var(--sky-500);">
+                    <i class="fa-solid fa-print"></i>
+                </div>
+                <h4>打印友好</h4>
+                <p>无动画效果，打开即为最终呈现效果</p>
+            </div>
+            <div class="card-light">
+                <div class="icon-box" style="background: var(--butter-100); color: var(--butter-500);">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                </div>
+                <h4>响应式设计</h4>
+                <p>支持移动端，自适应不同屏幕尺寸</p>
+            </div>
+            <div class="card-light">
+                <div class="icon-box" style="background: var(--peach-100); color: var(--peach-500);">
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+                <h4>所见即所得</h4>
+                <p>静态页面，无需 JavaScript，加载即可查看</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="editorial-footer">
+        <p style="font-size: 14px; color: var(--ink-400); margin-bottom: 12px;">
+            <strong>v1.2.0</strong> · 2024-04-15 · MIT License
+        </p>
+        <p style="font-size: 13px; color: var(--ink-400);">
+            <i class="fa-brands fa-github"></i>
+            <a href="https://github.com/HeiGeAi/html-beautifier" style="color: var(--lavender-500); text-decoration: none;">
+                github.com/HeiGeAi/html-beautifier
+            </a>
+        </p>
+        <p style="font-size: 13px; color: var(--ink-400); margin-top: 16px;">
+            Made with ❤️ by <strong>Blake 黑哥</strong>
+        </p>
+    </div>
+</div>
+</body>
+</html>
