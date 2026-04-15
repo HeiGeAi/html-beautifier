@@ -9,7 +9,7 @@ description: >
   "参考某网页做更美版本"、"把报告做成网页"时，必须使用此 skill。
   在生成前会与用户确认风格偏好和使用场景，确保输出符合需求。
 author: Blake 黑哥
-version: 1.2.0
+version: 1.2.1
 compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "OpenClaw", "Hermes", "ChatGPT", "Claude.ai", "通用 AI 助手"]
 ---
 
