@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.2.1-blue.svg)
+![Version](https://img.shields.io/badge/version-1.2.2-blue.svg)
 ![Claude](https://img.shields.io/badge/Claude-Skill-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -226,7 +226,7 @@ AI 会：
 4. 自动选择 Editorial 或 Dashboard 模式
 5. 生成 HTML 文件
 
-#### 场景 2：制作产品介绍幻灯片
+#### 场景 2：制作产品介绍长滚动页面
 
 **所有平台通用**:
 ```
@@ -236,9 +236,9 @@ AI 会：
 
 AI 会：
 1. 分析内容结构
-2. 建议使用 Deck 模式
-3. 生成 5-10 页幻灯片式 HTML
-4. 支持 scroll-snap 翻页效果
+2. 建议使用 Editorial 模式，按章节拆成强节奏模块
+3. 生成适合演示和打印的静态 HTML
+4. 通过首屏、章节分隔和卡片密度变化营造展示感
 
 #### 场景 3：参考学习现有网页
 
@@ -332,12 +332,16 @@ done
 ```
 html-beautifier/
 ├── SKILL.md                    # Skill 主文件（AI 助手读取）
+├── skill-intro-content.md      # 官方介绍页文案源文件
 ├── references/                 # 参考文档
 │   ├── design-system.md       # 完整 CSS 组件库和设计系统
 │   ├── visual-learning-guide.md # 视觉学习指南
 │   └── quality-checklist.md   # 质量验收清单
 ├── examples/                   # 示例文件
-│   └── demo.html              # 演示页面
+│   ├── demo.html              # 正式版静态示例页
+│   ├── skill-introduction.html # 官方介绍页
+│   └── assets/
+│       └── intro-header.png   # 介绍页顶部视觉图
 └── README.md                   # 本文件
 ```
 
@@ -345,15 +349,14 @@ html-beautifier/
 
 ## 在线演示
 
-查看 [examples/demo.html](examples/demo.html) 了解输出效果。
+查看 [examples/skill-introduction.html](examples/skill-introduction.html) 了解官方介绍页，
+查看 [examples/demo.html](examples/demo.html) 了解正式版静态示例页。
 
-这是一个 6 页的 Deck 模式示例，展示了：
-- 封面页（品牌 + 标语）
-- 特点介绍（四种布局模式）
-- 数据展示（关键指标）
-- 模式对比（四种模式详解）
-- 场景应用（使用案例）
-- 结束页（联系方式）
+当前示例展示了：
+- 顶部视觉图 + 正式版版本信息
+- 三种布局模式的使用边界
+- 静态输出、打印友好、跨平台安装方式
+- 与当前 skill 一致的无动画示例结构
 
 ---
 
@@ -394,9 +397,16 @@ html-beautifier/
 
 ## 版本历史 Version History
 
+### v1.2.2 (2026-04-16)
+- ✅ 修复正式文档与示例中的 Deck / scroll-snap 残留描述
+- ✅ 修复 `design-system.md` 中 Dashboard 骨架误写为 Editorial 的问题
+- ✅ 更新官方介绍页与文案源中的版本号和发布日期
+- ✅ 为官方介绍页加入顶部视觉图，并同步成正式版静态示例
+- ✅ 重写 `examples/demo.html`，与当前三模式静态体系保持一致
+
 ### v1.0.0 (2024-04-15)
 - 🎉 首次发布
-- ✅ 支持四种布局模式（Deck/Editorial/Dashboard/Single）
+- ✅ 历史版本曾支持四种布局模式（Deck/Editorial/Dashboard/Single）
 - ✅ 完整的马卡龙六色设计系统
 - ✅ 交互式风格确认流程
 - ✅ 参考学习和视觉拆解能力
@@ -446,6 +456,6 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 
 **如果这个项目对你有帮助，请给个 ⭐️ Star 支持一下！**
 
-Made with ❤️ by Blake 黑哥
+Made by Blake 黑哥
 
 </div>

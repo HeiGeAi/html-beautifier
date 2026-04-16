@@ -207,50 +207,6 @@ HTML 骨架：
 
 ### 3B. Dashboard 模式（看板）
 
-```css
-.editorial-page {
-    max-width: 840px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-.editorial-hero {
-    padding: 80px 0 48px;
-    text-align: center;
-    border-bottom: 1px solid var(--card-border);
-    margin-bottom: 48px;
-}
-
-.editorial-module {
-    padding: 40px 0;
-    border-bottom: 1px solid var(--ink-100);
-}
-.editorial-module:last-of-type {
-    border-bottom: none;
-}
-
-.editorial-footer {
-    padding: 48px 0;
-    text-align: center;
-    border-top: 1px solid var(--card-border);
-    margin-top: 32px;
-}
-```
-
-HTML 骨架：
-```html
-<body>
-<div class="editorial-page">
-    <div class="editorial-hero">...</div>
-    <div class="editorial-module">...</div>
-    <div class="editorial-module">...</div>
-    <div class="editorial-footer">...</div>
-</div>
-</body>
-```
-
-### 3B. Dashboard 模式（看板）
-
 **适用场景**：数据汇总、状态监控、多维对比、经营摘要
 
 ```css

@@ -35,7 +35,7 @@
 ### 安装方法
 ```bash
 mkdir -p ~/.claude/skills
-curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.0/html-beautifier.skill \
+curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.2/html-beautifier.skill \
   -o ~/.claude/skills/html-beautifier.skill
 ```
 
@@ -73,8 +73,8 @@ curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.0/html
 
 ## 版本信息
 
-当前版本：v1.2.0
-发布日期：2024-04-15
+当前版本：v1.2.2
+发布日期：2026-04-16
 作者：Blake 黑哥
 许可证：MIT License
 

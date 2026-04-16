@@ -52,32 +52,51 @@
 
         /* Editorial 布局 */
         .editorial-page {
-            max-width: 840px;
+            max-width: 1080px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
         .editorial-hero {
-            padding: 80px 0 48px;
+            padding: 56px 0 48px;
             text-align: center;
             border-bottom: 1px solid var(--card-border);
             margin-bottom: 48px;
         }
 
-        .editorial-hero h1 {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 48px;
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 16px;
+        .hero-art {
+            margin-bottom: 24px;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid rgba(167, 139, 218, 0.18);
+            box-shadow: 0 18px 48px rgba(122, 96, 180, 0.12);
+            background: #fff;
+        }
+
+        .hero-art img {
+            display: block;
+            width: 100%;
+            height: auto;
         }
 
         .editorial-hero .subtitle {
-            font-size: 18px;
+            font-size: 16px;
             color: var(--ink-500);
             line-height: 1.8;
-            max-width: 600px;
+            max-width: 760px;
             margin: 0 auto;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         .editorial-module {
@@ -249,7 +268,6 @@
 
         /* 响应式 */
         @media (max-width: 768px) {
-            .editorial-hero h1 { font-size: 36px; }
             .editorial-module h2 { font-size: 26px; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
         }
@@ -259,10 +277,13 @@
 <div class="editorial-page">
     <!-- Hero 首屏 -->
     <div class="editorial-hero">
-        <h1><span class="gt-lavender">HTML Beautifier</span></h1>
-        <p class="subtitle">跨平台通用的 HTML 美化系统，将任何内容转换为专业级视觉化页面。<br>零动画、打印友好、所见即所得。</p>
+        <h1 class="sr-only">HTML Beautifier</h1>
+        <div class="hero-art">
+            <img src="./assets/intro-header.png" alt="HTML Beautifier 正式版介绍图">
+        </div>
+        <p class="subtitle">正式版介绍页，内容与当前 release、SKILL 规范和示例输出保持同步。默认静态、打印友好、所见即所得。</p>
         <div style="margin-top: 24px;">
-            <span class="badge" style="background: var(--lavender-100); color: var(--lavender-500);">v1.2.0</span>
+            <span class="badge" style="background: var(--lavender-100); color: var(--lavender-500);">v1.2.2</span>
             <span class="badge" style="background: var(--mint-100); color: var(--mint-500);">MIT License</span>
             <span class="badge" style="background: var(--sky-100); color: var(--sky-500);">跨平台</span>
         </div>
@@ -386,7 +407,7 @@
         <h3>安装方法</h3>
         <div class="code-block">
 mkdir -p ~/.claude/skills
-curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.0/html-beautifier.skill \
+curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.2/html-beautifier.skill \
   -o ~/.claude/skills/html-beautifier.skill
         </div>
     </div>
@@ -398,7 +419,7 @@ curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.0/html
 
         <div class="grid-3">
             <div>
-                <h3 style="font-size: 18px; margin-top: 0;">完全支持 <span class="gt-mint">✓</span></h3>
+                <h3 style="font-size: 18px; margin-top: 0;">完全支持 <span class="gt-mint"><i class="fa-solid fa-circle-check"></i></span></h3>
                 <ul class="feature-list" style="margin-top: 12px;">
                     <li>Claude Code</li>
                     <li>Cursor</li>
@@ -407,7 +428,7 @@ curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.0/html
                 </ul>
             </div>
             <div>
-                <h3 style="font-size: 18px; margin-top: 0;">基础支持 <span class="gt-sky">⚠</span></h3>
+                <h3 style="font-size: 18px; margin-top: 0;">基础支持 <span class="gt-sky"><i class="fa-solid fa-circle-info"></i></span></h3>
                 <ul class="feature-list" style="margin-top: 12px;">
                     <li>Aider</li>
                     <li>OpenClaw</li>
@@ -415,7 +436,7 @@ curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.0/html
                 </ul>
             </div>
             <div>
-                <h3 style="font-size: 18px; margin-top: 0;">手动模式 <span style="color: var(--ink-400);">📝</span></h3>
+                <h3 style="font-size: 18px; margin-top: 0;">手动模式 <span style="color: var(--ink-400);"><i class="fa-regular fa-pen-to-square"></i></span></h3>
                 <ul class="feature-list" style="margin-top: 12px;">
                     <li>ChatGPT</li>
                     <li>Claude.ai</li>
@@ -481,7 +502,7 @@ curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.0/html
     <!-- Footer -->
     <div class="editorial-footer">
         <p style="font-size: 14px; color: var(--ink-400); margin-bottom: 12px;">
-            <strong>v1.2.0</strong> · 2024-04-15 · MIT License
+            <strong>v1.2.2</strong> · 2026-04-16 · MIT License
         </p>
         <p style="font-size: 13px; color: var(--ink-400);">
             <i class="fa-brands fa-github"></i>
@@ -490,7 +511,7 @@ curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.0/html
             </a>
         </p>
         <p style="font-size: 13px; color: var(--ink-400); margin-top: 16px;">
-            Made with ❤️ by <strong>Blake 黑哥</strong>
+            Made with <i class="fa-solid fa-heart" style="color: var(--rose-500);"></i> by <strong>Blake 黑哥</strong>
         </p>
     </div>
 </div>

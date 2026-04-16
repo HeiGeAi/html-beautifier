@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2] - 2026-04-16
+
+### Fixed
+- 修复 `SKILL.md`、`README.md`、官方示例中的 Deck / scroll-snap 残留描述
+- 修复 `references/design-system.md` 中误写的 Dashboard 骨架
+- 修复官方介绍页和文案源中的旧版本号、旧发布日期与旧下载链接
+
+### Changed
+- 重写 `examples/demo.html`，与当前三模式静态体系保持一致
+- 更新官方介绍页顶部视觉图，移除旧版本徽标干扰
+- 统一正式文档、示例和发布素材到 `v1.2.2`
+
 ## [1.2.1] - 2026-04-16
 
 ### Added
@@ -92,7 +104,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Planned Features
 - [ ] Dark mode support
-- [ ] More page templates for Deck mode
+- [ ] More page templates for Editorial / Dashboard / Single
 - [ ] Custom color theme generator
 - [ ] Image optimization and lazy loading
 - [ ] Multi-language support (English, Japanese)

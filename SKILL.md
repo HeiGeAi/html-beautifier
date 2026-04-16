@@ -9,7 +9,7 @@ description: >
   "参考某网页做更美版本"、"把报告做成网页"时，必须使用此 skill。
   在生成前会与用户确认风格偏好和使用场景，确保输出符合需求。
 author: Blake 黑哥
-version: 1.2.1
+version: 1.2.2
 compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "OpenClaw", "Hermes", "ChatGPT", "Claude.ai", "通用 AI 助手"]
 ---
 
@@ -65,7 +65,7 @@ compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "O
 - 需要，我会提供参考 URL 或本地 HTML 文件
 
 **平台适配说明**：
-- Claude Code/Cursor/Windsurf：使用 AskUserQuestion 工具或直接询问
+- Claude Code/Cursor/Windsurf：使用平台原生提问能力或直接询问
 - ChatGPT/Claude.ai：直接以文本形式询问用户
 - 其他平台：根据平台特性选择最合适的交互方式
 
@@ -73,25 +73,24 @@ compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "O
 
 根据用户的场景选择和内容特征，自动选择最合适的布局模式：
 
-#### 模式 A：Deck（幻灯片翻页式）
-**适用于**：方案展示、pitch deck、公司介绍、产品介绍
-**特征**：scroll-snap 全屏翻页，每页一屏，页码标注
-**最少页数**：3 页（封面 + 内容 + 结束），不限上限
-
-#### 模式 B：Editorial（编辑式长滚动）
+#### 模式 A：Editorial（编辑式长滚动）
 **适用于**：分析报告、复盘总结、深度内容、研究文档、文章型内容
 **特征**：连续滚动阅读，模块间有明确分界，无翻页
 **适合**：内容量大但不需要一屏一屏展示的场景
 
-#### 模式 C：Dashboard（看板/仪表盘式）
+#### 模式 B：Dashboard（看板/仪表盘式）
 **适用于**：数据总览、项目状态、多维信息汇总、对比分析、经营摘要
 **特征**：单屏或少量滚动，信息密度高，卡片网格排列
 **适合**：需要一眼看全貌的场景
 
-#### 模式 D：Single（单页海报式）
+#### 模式 C：Single（单页海报式）
 **适用于**：活动海报、单页简历、产品单页、邀请函
 **特征**：一页搞定，居中排版，强视觉冲击
 **适合**：信息量少但要求精致的场景
+
+**补充说明**：
+- 方案展示、产品介绍、公司介绍默认优先使用 Editorial，通过大段落模块和强节奏首屏实现展示感
+- 只有在信息量很少且希望一屏完成时，才切换到 Single
 
 ### 第四步：生成 HTML
 
@@ -104,7 +103,7 @@ compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "O
 **平台适配说明**：
 - 如果平台支持文件写入，直接保存到用户指定位置或默认输出目录
 - 如果不支持文件写入，将完整 HTML 代码以代码块形式输出给用户
-- 建议文件名格式：`beautified-[场景]-[日期].html`（如 `beautified-deck-20240415.html`）
+- 建议文件名格式：`beautified-[场景]-[日期].html`（如 `beautified-editorial-20260416.html`）
 
 ### 第五步：交付说明
 
@@ -263,7 +262,7 @@ compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "O
 本 skill 设计为跨平台通用，适配以下 AI 编程助手：
 
 ### 完全支持（推荐）
-- **Claude Code**：原生支持，可使用所有工具（AskUserQuestion、文件读写等）
+- **Claude Code**：原生支持，可使用平台原生提问能力、文件读写等完整能力
 - **Cursor**：支持文件操作和用户交互
 - **Windsurf**：支持文件操作和用户交互
 - **Cline**：支持文件操作
@@ -307,4 +306,4 @@ compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "O
 
 ---
 
-**Made with ❤️ by Blake 黑哥**
+**Made by Blake 黑哥**
