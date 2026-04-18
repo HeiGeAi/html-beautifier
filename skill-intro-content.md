@@ -35,7 +35,7 @@
 ### 安装方法
 ```bash
 mkdir -p ~/.claude/skills
-curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.2/html-beautifier.skill \
+curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.3.0/html-beautifier.skill \
   -o ~/.claude/skills/html-beautifier.skill
 ```
 
@@ -58,10 +58,11 @@ curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.2/html
 
 ## 设计理念
 
-「卡片即信息容器，留白即呼吸感，节奏即叙事力」
+「卡片即信息容器，密度即专业感，节奏即叙事力」
 
-所有内容通过精心设计的卡片、标签、图标组合来承载，不堆砌文字。
-每一个模块都是一张完整的视觉海报，有清晰的信息层次。
+信息密度要够：每张卡片承载 3-5 条有效信息，不让空白撑高卡片。
+留白是为节奏服务：克制的呼吸感强过稀疏的空壳。
+每一个模块都有清晰的信息层次和节奏节拍。
 
 ## 输出特点
 
@@ -73,8 +74,8 @@ curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.2/html
 
 ## 版本信息
 
-当前版本：v1.2.2
-发布日期：2026-04-16
+当前版本：v1.3.0
+发布日期：2026-04-18
 作者：Blake 黑哥
 许可证：MIT License
 

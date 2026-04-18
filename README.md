@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.2.2-blue.svg)
+![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)
 ![Claude](https://img.shields.io/badge/Claude-Skill-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -396,6 +396,14 @@ html-beautifier/
 ---
 
 ## 版本历史 Version History
+
+### v1.3.0 (2026-04-18)
+- ✨ 新增「密度基准」硬约束：卡片密度、布局密度、章节密度、首屏密度
+- ✨ 新增反向锚定：严格禁止列表新增 4 条反稀疏反模式，致命项扩展到 6 条
+- ✨ 新增 quality-checklist B2 信息密度自检章节
+- 🔄 系统性收紧 9 组核心参数：Hero padding、section padding、card padding、grid gap 等
+- 🔄 card-light 补齐默认 padding `18px 20px` 和 border-radius `14px`
+- 🎨 重写示例页：增加 hero-stats、深色对比段、卡片信息层数扩展
 
 ### v1.2.2 (2026-04-16)
 - ✅ 修复正式文档与示例中的 Deck / scroll-snap 残留描述

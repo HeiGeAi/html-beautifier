@@ -5,6 +5,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-04-18
+
+### Added（反向锚定）
+- ✨ SKILL.md 新增「密度基准」章节，给出卡片密度、布局密度、章节密度、首屏密度四组硬约束
+- ✨ 严格禁止列表新增 4 条反密度反模式：信息密度不足 / padding 堆叠 / 密度倒挂 / section-head 垂直占位超 100px
+- ✨ quality-checklist.md 新增 B2 信息密度自检章节，包含 7 项具体检查点
+- ✨ 致命项从 5 条扩展到 6 条，信息密度不足列入必检项
+- ✨ design-system.md 顶部增加「密度硬规则」速查表，9 行参数基准一览
+
+### Changed（参数收紧）
+- 🔄 editorial-hero padding: `80px 0 48px` → `56px 0 36px`（Hero 不再占满首屏）
+- 🔄 editorial-module padding: `40px 0` → `32px 0`
+- 🔄 editorial-footer padding: `48px 0` → `32px 0`
+- 🔄 section-page padding: `40px 48px` → `32px 40px`
+- 🔄 dashboard-card padding: `20px 24px` → `16px 20px`
+- 🔄 dashboard-grid gap: `16px` → `12px`
+- 🔄 grid-4 gap: `16px` → `12px`
+- 🔄 grid-3 gap: `16px` → `14px`
+- 🔄 grid-5 gap: `12px` → `10px`
+- 🔄 grid-2-1 / grid-1-2 gap: `20px` → `18px`
+- 🔄 card-light 新增默认 padding `18px 20px` 和 border-radius `14px`，不再需要每次 inline 写
+
+### Changed（指南语义重构）
+- 📝 核心理念从「留白即呼吸感」改为「密度即专业感」，反向锚定信息承载量
+- 📝 严格禁止删除「大段文字堆砌」（这一条与密度要求冲突）
+- 📝 quality-checklist 代码搜索清单新增 padding/gap 过大检测
+
+### Changed（示例同步）
+- 🎨 重写 `examples/demo.html` 为 v1.3.0 密度优化版
+- 🎨 demo 新增 hero-stats 数据条（首屏多 4 项数据）
+- 🎨 demo 新增深色对比数据段（节奏变化点）
+- 🎨 demo 所有卡片从"icon + 标题 + 描述"3 层扩展到 5 层（增加 mini-tags 和 Before/After meta）
+- 🎨 硬约束列表从 4+4 扩展到 6+6，覆盖新密度规则
+
+### Version Bump
+- 📦 SKILL.md / README.md / skill-intro-content.md 版本号统一升级到 v1.3.0
+
 ## [1.2.2] - 2026-04-16
 
 ### Fixed

@@ -5,6 +5,24 @@
 
 **重要说明**：所有样式均为静态，无动画效果（无 transition、animation、hover），确保打印友好。
 
+## ⚠️ 密度硬规则（v1.3.0）
+
+生成任何页面前，先记住这组数值基准。偏离即是稀疏。
+
+| 参数 | 基准值 | 说明 |
+|---|---|---|
+| card-light padding | **18px 20px** | 不要写 22px+，Hero 级大卡除外 |
+| grid-4 gap | **12px** | gap ≤ card padding 是硬规则 |
+| grid-3 gap | **14px** |  |
+| grid-2 gap | **16px** |  |
+| editorial-hero padding | **56px 0 36px** | Hero 总高度 ≤ 480px |
+| editorial-module padding | **32px 0** | 模块间节奏 |
+| section-head 总高 | **≤ 100px** | eyebrow + h2 + 描述 + divider 全部算进去 |
+| dashboard-card padding | **16px 20px** | 看板卡比内容卡更紧 |
+| h2 margin-bottom | **4-6px** | 让 divider 紧贴标题 |
+
+**核心原则**：密度倒挂（gap > card padding）= 立即修复。
+
 ## 目录
 
 1. [CSS 变量（全部颜色 Token）](#1-css-变量)
@@ -101,7 +119,7 @@ body {
 
 /* 通用内容容器 */
 .section-page {
-    padding: 40px 48px;
+    padding: 32px 40px;
     background: #fff;
 }
 .section-inner {
@@ -155,14 +173,14 @@ body {
 }
 
 .editorial-hero {
-    padding: 80px 0 48px;
+    padding: 56px 0 36px;
     text-align: center;
     border-bottom: 1px solid var(--card-border);
-    margin-bottom: 48px;
+    margin-bottom: 32px;
 }
 
 .editorial-module {
-    padding: 40px 0;
+    padding: 32px 0;
     border-bottom: 1px solid var(--ink-100);
 }
 .editorial-module:last-of-type {
@@ -170,10 +188,10 @@ body {
 }
 
 .editorial-footer {
-    padding: 48px 0;
+    padding: 32px 0;
     text-align: center;
     border-top: 1px solid var(--card-border);
-    margin-top: 32px;
+    margin-top: 24px;
 }
 ```
 
@@ -252,7 +270,7 @@ HTML 骨架：
 
 .dashboard-grid {
     display: grid;
-    gap: 16px;
+    gap: 12px;
 }
 .dashboard-grid.cols-2 { grid-template-columns: 1fr 1fr; }
 .dashboard-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -264,14 +282,14 @@ HTML 骨架：
     background: #fff;
     border: 1px solid var(--card-border);
     border-radius: 14px;
-    padding: 20px 24px;
+    padding: 16px 20px;
     box-shadow: var(--card-shadow);
 }
 .dashboard-card-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 .dashboard-card-title {
     font-size: 14px;
@@ -430,8 +448,15 @@ HTML 骨架：
     background: #fff;
     border: 1px solid var(--card-border);
     box-shadow: var(--card-shadow);
+    padding: 18px 20px;
+    border-radius: 14px;
 }
 ```
+
+**默认值说明**（v1.3.0 新增）：
+- 默认 padding: 18px 20px，不要在 inline style 里改成 22px+
+- 默认 border-radius: 14px
+- 中卡用 12px，小卡（如 tag 容器）用 10px
 
 推荐 border-radius：14px 大卡、12px 中卡、10px 小卡。
 
@@ -651,11 +676,11 @@ HTML 骨架：
 ```css
 /* 网格 */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-.grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-.grid-1-2 { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; }
+.grid-1-2 { display: grid; grid-template-columns: 1fr 2fr; gap: 18px; }
 
 /* Flex */
 .flex { display: flex; }

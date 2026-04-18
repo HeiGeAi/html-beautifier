@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Beautifier - 正式版静态示例</title>
+    <title>HTML Beautifier v1.3.0 · 密度优化版示例</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -18,7 +18,7 @@
             --ink-400: #908da3; --ink-300: #b5b3c4; --ink-200: #d8d6e3; --ink-100: #eceaf3;
             --base-50: #fafbfc; --base-100: #f1f0f5;
             --card-border: #e8e6ef;
-            --card-shadow: 0 1px 3px rgba(100,80,140,0.04), 0 8px 32px rgba(100,80,140,0.06);
+            --card-shadow: 0 1px 3px rgba(100,80,140,0.04), 0 8px 32px rgba(100,80,140,0.05);
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,37 +27,37 @@
             font-family: 'Noto Sans SC', 'DM Sans', -apple-system, 'PingFang SC', sans-serif;
             color: var(--ink-900);
             background:
-                radial-gradient(circle at top right, rgba(167, 139, 218, 0.12), transparent 32%),
-                radial-gradient(circle at bottom left, rgba(122, 180, 217, 0.10), transparent 28%),
+                radial-gradient(circle at top right, rgba(167, 139, 218, 0.10), transparent 32%),
+                radial-gradient(circle at bottom left, rgba(122, 180, 217, 0.09), transparent 28%),
                 var(--base-50);
             -webkit-font-smoothing: antialiased;
-            line-height: 1.75;
+            line-height: 1.7;
         }
 
         .page {
             max-width: 1120px;
             margin: 0 auto;
-            padding: 40px 24px 72px;
+            padding: 32px 24px 56px;
         }
 
+        /* ========== Hero ========== */
         .hero {
             position: relative;
             overflow: hidden;
-            padding: 56px 56px 48px;
-            background: rgba(255, 255, 255, 0.84);
-            border: 1px solid rgba(167, 139, 218, 0.18);
-            box-shadow: 0 18px 60px rgba(116, 92, 172, 0.08);
-            border-radius: 28px;
-            backdrop-filter: blur(18px);
+            padding: 40px 44px 36px;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(167, 139, 218, 0.16);
+            box-shadow: 0 14px 48px rgba(116, 92, 172, 0.06);
+            border-radius: 24px;
         }
 
         .hero::before {
             content: "";
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(circle, rgba(181, 179, 196, 0.45) 1px, transparent 1px);
+            background-image: radial-gradient(circle, rgba(181, 179, 196, 0.4) 1px, transparent 1px);
             background-size: 24px 24px;
-            opacity: 0.18;
+            opacity: 0.16;
             pointer-events: none;
         }
 
@@ -73,15 +73,15 @@
             letter-spacing: 0.24em;
             text-transform: uppercase;
             color: var(--lavender-500);
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
 
         .hero h1 {
             font-family: 'Noto Serif SC', serif;
-            font-size: 58px;
+            font-size: 48px;
             font-weight: 900;
-            line-height: 1.08;
-            margin-bottom: 18px;
+            line-height: 1.12;
+            margin-bottom: 14px;
         }
 
         .gt-lavender {
@@ -91,329 +91,774 @@
             background-clip: text;
         }
 
-        .hero p {
-            max-width: 760px;
-            font-size: 18px;
+        .hero-desc {
+            max-width: 720px;
+            font-size: 16px;
             color: var(--ink-500);
+            line-height: 1.75;
         }
 
         .hero-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 28px;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
+            gap: 6px;
+            padding: 5px 12px;
             border-radius: 999px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
+            letter-spacing: 0.02em;
         }
 
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(167, 139, 218, 0.16);
+        }
+
+        .hero-stat {
+            padding: 0 16px;
+            border-right: 1px solid var(--ink-100);
+        }
+        .hero-stat:first-child { padding-left: 0; }
+        .hero-stat:last-child { border-right: none; }
+
+        .hero-stat-value {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--ink-900);
+            line-height: 1.1;
+        }
+        .hero-stat-value .delta {
+            font-size: 12px;
+            color: var(--mint-deep);
+            font-weight: 700;
+            margin-left: 4px;
+        }
+        .hero-stat-label {
+            font-size: 11px;
+            color: var(--ink-400);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            margin-top: 4px;
+        }
+
+        /* ========== Section 外壳 ========== */
         .section {
-            margin-top: 28px;
-            padding: 36px;
+            margin-top: 20px;
+            padding: 26px 32px 28px;
             background: #fff;
             border: 1px solid var(--card-border);
             box-shadow: var(--card-shadow);
-            border-radius: 24px;
+            border-radius: 20px;
         }
 
         .section-head {
-            margin-bottom: 24px;
+            margin-bottom: 18px;
         }
 
         .section-tag {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: 0.22em;
             text-transform: uppercase;
             color: var(--sky-deep);
-            margin-bottom: 12px;
+            margin-bottom: 6px;
         }
 
         .section h2 {
             font-family: 'Noto Serif SC', serif;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 900;
-            line-height: 1.3;
-            margin-bottom: 10px;
-        }
-
-        .section-desc {
-            font-size: 15px;
-            color: var(--ink-500);
-            max-width: 760px;
+            line-height: 1.25;
+            margin-bottom: 4px;
         }
 
         .section-divider {
-            width: 48px;
+            width: 40px;
             height: 3px;
             border-radius: 2px;
-            margin-top: 16px;
+            margin-top: 6px;
             background: linear-gradient(90deg, var(--lavender-500), var(--sky-500));
         }
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .section-desc {
+            font-size: 14px;
+            color: var(--ink-500);
+            max-width: 740px;
+            margin-top: 10px;
+        }
 
+        /* ========== 网格 ========== */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+        /* ========== Card ========== */
         .card-light {
             background: #fff;
             border: 1px solid var(--card-border);
             box-shadow: var(--card-shadow);
-            border-radius: 18px;
-            padding: 22px;
+            border-radius: 14px;
+            padding: 18px 20px;
         }
 
-        .card-light h3,
-        .card-light h4 {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: var(--ink-900);
-        }
-
-        .card-light p,
-        .card-light li {
-            font-size: 14px;
-            color: var(--ink-600);
+        .card-light .card-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
         .icon-box {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            margin-bottom: 14px;
+            font-size: 15px;
+            flex-shrink: 0;
         }
 
-        .metric {
+        .card-light h3 {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--ink-900);
+            line-height: 1.3;
+        }
+
+        .card-light p.card-desc {
+            font-size: 13px;
+            color: var(--ink-600);
+            line-height: 1.65;
+            margin-bottom: 10px;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-top: 10px;
+            border-top: 1px solid var(--ink-100);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--ink-400);
+        }
+        .card-meta .meta-val {
+            color: var(--ink-600);
+            font-weight: 700;
+        }
+        .card-meta .meta-delta {
+            color: var(--mint-deep);
+            margin-left: auto;
+            font-weight: 700;
+        }
+
+        .mini-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 8px;
+        }
+        .mini-tag {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        /* ========== 对比数据段（节奏变化） ========== */
+        .compare-section {
+            margin-top: 20px;
+            padding: 24px 32px;
+            background: var(--ink-900);
+            border-radius: 20px;
+            color: #eef0f4;
+        }
+        .compare-section .section-tag {
+            color: var(--butter-500);
+        }
+        .compare-section h2 {
+            color: #fff;
+            margin-bottom: 4px;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1.25;
+        }
+        .compare-section .section-divider {
+            background: linear-gradient(90deg, var(--butter-500), var(--peach-500));
+        }
+        .compare-section .section-desc {
+            color: rgba(238, 240, 244, 0.65);
+            font-size: 14px;
+            max-width: 740px;
+            margin-top: 10px;
+        }
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .compare-cell {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px 16px;
+        }
+        .compare-label {
+            font-size: 10px;
+            color: rgba(238, 240, 244, 0.55);
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+        }
+        .compare-row {
             display: flex;
             align-items: baseline;
-            gap: 10px;
-            margin-bottom: 14px;
-        }
-
-        .metric-value {
+            gap: 8px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 38px;
-            font-weight: 700;
-            line-height: 1;
+            line-height: 1.3;
         }
-
-        .metric-label {
+        .compare-before {
+            color: rgba(238, 240, 244, 0.4);
+            text-decoration: line-through;
+            font-weight: 500;
             font-size: 13px;
-            color: var(--ink-400);
-            font-weight: 600;
+        }
+        .compare-after {
+            color: var(--butter-500);
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .compare-delta {
+            font-size: 11px;
+            color: var(--mint-500);
+            font-weight: 700;
+            margin-left: auto;
         }
 
-        .check-list {
+        /* ========== 模式展示卡 ========== */
+        .mode-card {
+            background: #fff;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+            border-radius: 14px;
+            padding: 18px 20px;
+        }
+        .mode-card-head {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--ink-100);
+            margin-bottom: 10px;
+        }
+        .mode-letter {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 0.9;
+        }
+        .mode-head-text .mode-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--ink-400);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .mode-head-text h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-top: 2px;
+        }
+        .mode-card p {
+            font-size: 13px;
+            color: var(--ink-600);
+            line-height: 1.65;
+            margin-bottom: 10px;
+        }
+        .mode-usage {
+            font-size: 11.5px;
+            color: var(--ink-500);
+            line-height: 1.7;
+        }
+        .mode-usage strong {
+            color: var(--ink-800);
+            font-weight: 700;
+        }
+
+        /* ========== 规则对照 ========== */
+        .rules-card {
+            background: #fff;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+            border-radius: 14px;
+            padding: 16px 20px;
+        }
+        .rules-card.must { border-left: 3px solid var(--mint-500); }
+        .rules-card.nope { border-left: 3px solid var(--rose-500); }
+        .rules-card h4 {
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .rules-card.must h4 { color: var(--mint-deep); }
+        .rules-card.nope h4 { color: var(--rose-deep); }
+
+        .rule-list {
             list-style: none;
             display: grid;
-            gap: 12px;
+            gap: 7px;
         }
-
-        .check-list li {
+        .rule-list li {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: flex-start;
+            font-size: 12.5px;
+            color: var(--ink-600);
+            line-height: 1.55;
         }
-
-        .check-list i {
-            color: var(--mint-500);
+        .rule-list i {
+            font-size: 10px;
             margin-top: 5px;
+            flex-shrink: 0;
+        }
+        .rules-card.must .rule-list i { color: var(--mint-500); }
+        .rules-card.nope .rule-list i { color: var(--rose-500); }
+        .rule-list code {
+            font-family: 'DM Sans', monospace;
+            font-size: 11px;
+            padding: 1px 5px;
+            background: var(--base-100);
+            border-radius: 3px;
+            color: var(--ink-800);
         }
 
+        /* ========== 安装 ========== */
+        .install-card {
+            background: #fff;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+            border-radius: 14px;
+            padding: 16px 20px;
+        }
+        .install-card h4 {
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ink-900);
+        }
+        .install-card h4 .num-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--sky-500);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
         .code-block {
             background: var(--ink-900);
             color: #eef0f4;
-            padding: 22px 24px;
-            border-radius: 16px;
-            font-family: 'DM Sans', monospace;
-            font-size: 14px;
-            line-height: 1.65;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-family: 'DM Sans', 'SF Mono', monospace;
+            font-size: 12.5px;
+            line-height: 1.6;
             overflow-x: auto;
             white-space: pre;
         }
+        .code-block .cmt { color: var(--ink-400); }
+        .inline-code {
+            font-family: 'DM Sans', monospace;
+            font-size: 12px;
+            padding: 1px 6px;
+            background: var(--base-100);
+            border-radius: 4px;
+        }
 
         .footer {
-            padding: 28px 0 12px;
+            padding: 24px 0 4px;
             text-align: center;
             color: var(--ink-400);
-            font-size: 13px;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
+        .footer strong { color: var(--ink-600); font-weight: 700; }
+        .footer .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-300); }
 
         @media print {
             body { background: #fff; }
-            .hero, .section, .card-light { box-shadow: none; }
-            .hero, .section { break-inside: avoid; }
+            .hero, .section, .card-light, .mode-card, .rules-card, .install-card, .compare-section { box-shadow: none; }
+            .hero, .section, .compare-section { break-inside: avoid; }
         }
 
         @media (max-width: 1024px) {
-            .hero { padding: 40px 32px; }
-            .hero h1 { font-size: 46px; }
+            .hero { padding: 32px 28px; }
+            .hero h1 { font-size: 38px; }
             .grid-4 { grid-template-columns: 1fr 1fr; }
+            .hero-stats { grid-template-columns: 1fr 1fr; gap: 14px 0; }
+            .hero-stat:nth-child(2) { border-right: none; }
+            .compare-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
-            .page { padding: 24px 16px 48px; }
-            .hero { padding: 28px 22px; border-radius: 22px; }
-            .hero h1 { font-size: 34px; }
-            .hero p { font-size: 16px; }
-            .section { padding: 26px 20px; border-radius: 20px; }
-            .section h2 { font-size: 28px; }
+            .page { padding: 20px 14px 40px; }
+            .hero { padding: 24px 20px; border-radius: 18px; }
+            .hero h1 { font-size: 28px; }
+            .hero-desc { font-size: 14px; }
+            .section { padding: 20px 18px; border-radius: 16px; }
+            .section h2 { font-size: 22px; }
+            .compare-section { padding: 20px 18px; }
+            .compare-section h2 { font-size: 22px; }
             .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .compare-grid { grid-template-columns: 1fr; }
+            .hero-stats { grid-template-columns: 1fr 1fr; }
+            .hero-stat { padding: 0 12px; }
         }
     </style>
 </head>
 <body>
 <div class="page">
+
+    <!-- ============ Hero ============ -->
     <section class="hero">
-        <div class="eyebrow"><i class="fa-solid fa-sparkles"></i> STATIC SHOWCASE</div>
-        <h1>HTML Beautifier 的<span class="gt-lavender">正式版示例</span></h1>
-        <p>这份页面用于展示当前发布版本的静态输出标准：只有三种布局模式、无动画、打印友好，且文档、skill、示例页保持一致。</p>
+        <div class="eyebrow"><i class="fa-solid fa-gauge-high"></i> v1.3.0 DENSITY PATCH</div>
+        <h1>HTML Beautifier 的<span class="gt-lavender">密度优化版</span></h1>
+        <p class="hero-desc">v1.3.0 是一次视觉参数的系统性重调。针对 v1.2.x 输出偏空旷、信息密度不足的问题，从规范层、实现层、指南层三处同步收紧，让 LLM 生成的页面信息承载量明显提升，同时保留打印友好和静态输出的所有硬约束。</p>
         <div class="hero-meta">
-            <span class="badge" style="background: var(--lavender-100); color: var(--lavender-500);">v1.2.2</span>
-            <span class="badge" style="background: var(--mint-100); color: var(--mint-500);">Static Only</span>
-            <span class="badge" style="background: var(--sky-100); color: var(--sky-500);">Print Ready</span>
+            <span class="badge" style="background: var(--lavender-100); color: var(--lavender-500);"><i class="fa-solid fa-tag"></i> v1.3.0</span>
+            <span class="badge" style="background: var(--mint-100); color: var(--mint-500);"><i class="fa-solid fa-compress"></i> 密度收紧</span>
+            <span class="badge" style="background: var(--sky-100); color: var(--sky-500);"><i class="fa-solid fa-print"></i> 打印友好</span>
+            <span class="badge" style="background: var(--butter-100); color: var(--butter-deep);"><i class="fa-solid fa-ruler-combined"></i> 反向锚定</span>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-value">9 <span class="delta">项</span></div>
+                <div class="hero-stat-label">核心参数收紧</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-value">3 <span class="delta">层</span></div>
+                <div class="hero-stat-label">同步调整范围</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-value">+7 <span class="delta">条</span></div>
+                <div class="hero-stat-label">反向锚定新增</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-value">0</div>
+                <div class="hero-stat-label">结构破坏改动</div>
+            </div>
         </div>
     </section>
 
+    <!-- ============ Section 1: 四组升级 ============ -->
     <section class="section">
         <div class="section-head">
-            <div class="section-tag"><i class="fa-solid fa-bullseye"></i> WHAT YOU GET</div>
-            <h2>这次正式版修复了什么</h2>
-            <p class="section-desc">本次发布重点不是加新花样，而是把已有承诺彻底对齐，避免文档说一套、示例做一套、skill 又引导另一套。</p>
+            <div class="section-tag"><i class="fa-solid fa-bullseye"></i> WHAT CHANGED</div>
+            <h2>v1.3.0 的四组核心升级</h2>
             <div class="section-divider"></div>
+            <p class="section-desc">本次调整不引入新组件、不破坏已有产出的视觉连续性，只把参数和指南两端同步拧紧，让生成结果从「空壳套空壳」变成「卡片实装信息」。</p>
         </div>
         <div class="grid-4">
-            <article class="card-light" style="background: var(--lavender-50); border-color: var(--lavender-100);">
-                <div class="icon-box" style="background: var(--lavender-100); color: var(--lavender-500);"><i class="fa-solid fa-layer-group"></i></div>
-                <h3>三模式统一</h3>
-                <p>正式去掉 Deck 相关残留描述，所有入口都只保留 Editorial、Dashboard、Single。</p>
+            <article class="card-light">
+                <div class="card-head">
+                    <div class="icon-box" style="background: var(--lavender-100); color: var(--lavender-500);"><i class="fa-solid fa-compress-arrows-alt"></i></div>
+                    <h3>Padding 收紧</h3>
+                </div>
+                <p class="card-desc">card-light 默认 padding 从无规范改为 18x20，杜绝 22px+ 的虚胖写法。</p>
+                <div class="mini-tags">
+                    <span class="mini-tag" style="background: var(--lavender-50); color: var(--lavender-deep);">card-light</span>
+                    <span class="mini-tag" style="background: var(--base-100); color: var(--ink-600);">dashboard-card</span>
+                </div>
+                <div class="card-meta">
+                    <span>Before</span><span class="meta-val" style="text-decoration: line-through; color: var(--ink-400);">22px</span>
+                    <span class="meta-delta">18-20 <i class="fa-solid fa-arrow-down"></i></span>
+                </div>
             </article>
-            <article class="card-light" style="background: var(--mint-50); border-color: var(--mint-100);">
-                <div class="icon-box" style="background: var(--mint-100); color: var(--mint-500);"><i class="fa-solid fa-diagram-project"></i></div>
-                <h3>模板纠偏</h3>
-                <p>修复 design-system 中 Dashboard 骨架误写成 Editorial 的问题，避免跟着模板做错页面。</p>
+            <article class="card-light">
+                <div class="card-head">
+                    <div class="icon-box" style="background: var(--mint-100); color: var(--mint-500);"><i class="fa-solid fa-grip"></i></div>
+                    <h3>Grid gap 校准</h3>
+                </div>
+                <p class="card-desc">grid-4 gap 从 16 降到 12，解决「卡间比卡内还松」的密度倒挂。</p>
+                <div class="mini-tags">
+                    <span class="mini-tag" style="background: var(--mint-50); color: var(--mint-deep);">grid-4</span>
+                    <span class="mini-tag" style="background: var(--mint-50); color: var(--mint-deep);">grid-3</span>
+                    <span class="mini-tag" style="background: var(--mint-50); color: var(--mint-deep);">grid-2</span>
+                </div>
+                <div class="card-meta">
+                    <span>Rule</span><span class="meta-val">gap ≤ padding</span>
+                </div>
             </article>
-            <article class="card-light" style="background: var(--sky-50); border-color: var(--sky-100);">
-                <div class="icon-box" style="background: var(--sky-100); color: var(--sky-500);"><i class="fa-solid fa-tag"></i></div>
-                <h3>版本同步</h3>
-                <p>示例、下载命令、文案源、页脚与 changelog 统一到当前正式版版本号。</p>
+            <article class="card-light">
+                <div class="card-head">
+                    <div class="icon-box" style="background: var(--sky-100); color: var(--sky-500);"><i class="fa-solid fa-arrows-up-down"></i></div>
+                    <h3>Hero 瘦身</h3>
+                </div>
+                <p class="card-desc">editorial-hero padding 从 80+48 降到 56+36，Hero 不再占满首屏。</p>
+                <div class="mini-tags">
+                    <span class="mini-tag" style="background: var(--sky-50); color: var(--sky-deep);">hero</span>
+                    <span class="mini-tag" style="background: var(--sky-50); color: var(--sky-deep);">H ≤ 480</span>
+                </div>
+                <div class="card-meta">
+                    <span>Before</span><span class="meta-val" style="text-decoration: line-through; color: var(--ink-400);">~440</span>
+                    <span class="meta-delta">~360 <i class="fa-solid fa-arrow-down"></i></span>
+                </div>
             </article>
-            <article class="card-light" style="background: var(--peach-50); border-color: var(--peach-100);">
-                <div class="icon-box" style="background: var(--peach-100); color: var(--peach-500);"><i class="fa-solid fa-image"></i></div>
-                <h3>顶部视觉图</h3>
-                <p>官方介绍页新增顶部横幅，并把图里的旧版本徽标替换为当前版本。</p>
+            <article class="card-light">
+                <div class="card-head">
+                    <div class="icon-box" style="background: var(--peach-100); color: var(--peach-500);"><i class="fa-solid fa-arrow-down-wide-short"></i></div>
+                    <h3>Section-head 紧贴</h3>
+                </div>
+                <p class="card-desc">eyebrow / h2 / divider 紧贴排版，从独立五件套压缩到 ≤100px 垂直占位。</p>
+                <div class="mini-tags">
+                    <span class="mini-tag" style="background: var(--peach-50); color: var(--peach-deep);">section-head</span>
+                    <span class="mini-tag" style="background: var(--peach-50); color: var(--peach-deep);">divider</span>
+                </div>
+                <div class="card-meta">
+                    <span>Before</span><span class="meta-val" style="text-decoration: line-through; color: var(--ink-400);">~160</span>
+                    <span class="meta-delta">~80 <i class="fa-solid fa-arrow-down"></i></span>
+                </div>
             </article>
         </div>
     </section>
 
+    <!-- ============ Section 2: 密度对比（节奏变化段） ============ -->
+    <section class="compare-section">
+        <div class="section-head">
+            <div class="section-tag"><i class="fa-solid fa-code-compare"></i> BEFORE · AFTER</div>
+            <h2>关键数值收紧对照</h2>
+            <div class="section-divider"></div>
+            <p class="section-desc">从八个核心参数看 v1.3.0 的调整幅度。每个数字都有明确的视觉效果：让卡片更实、让节奏更紧、让首屏能看到更多内容。</p>
+        </div>
+        <div class="compare-grid">
+            <div class="compare-cell">
+                <div class="compare-label">SECTION-PAGE PADDING</div>
+                <div class="compare-row">
+                    <span class="compare-before">40×48</span>
+                    <span class="compare-after">32×40</span>
+                    <span class="compare-delta">-20%</span>
+                </div>
+            </div>
+            <div class="compare-cell">
+                <div class="compare-label">EDITORIAL-MODULE</div>
+                <div class="compare-row">
+                    <span class="compare-before">40px</span>
+                    <span class="compare-after">32px</span>
+                    <span class="compare-delta">-20%</span>
+                </div>
+            </div>
+            <div class="compare-cell">
+                <div class="compare-label">EDITORIAL-HERO</div>
+                <div class="compare-row">
+                    <span class="compare-before">80+48</span>
+                    <span class="compare-after">56+36</span>
+                    <span class="compare-delta">-28%</span>
+                </div>
+            </div>
+            <div class="compare-cell">
+                <div class="compare-label">DASHBOARD-CARD</div>
+                <div class="compare-row">
+                    <span class="compare-before">20×24</span>
+                    <span class="compare-after">16×20</span>
+                    <span class="compare-delta">-20%</span>
+                </div>
+            </div>
+            <div class="compare-cell">
+                <div class="compare-label">GRID-4 GAP</div>
+                <div class="compare-row">
+                    <span class="compare-before">16px</span>
+                    <span class="compare-after">12px</span>
+                    <span class="compare-delta">-25%</span>
+                </div>
+            </div>
+            <div class="compare-cell">
+                <div class="compare-label">GRID-3 GAP</div>
+                <div class="compare-row">
+                    <span class="compare-before">16px</span>
+                    <span class="compare-after">14px</span>
+                    <span class="compare-delta">-12%</span>
+                </div>
+            </div>
+            <div class="compare-cell">
+                <div class="compare-label">CARD-LIGHT PADDING</div>
+                <div class="compare-row">
+                    <span class="compare-before">22px</span>
+                    <span class="compare-after">18-20</span>
+                    <span class="compare-delta">-15%</span>
+                </div>
+            </div>
+            <div class="compare-cell">
+                <div class="compare-label">DASHBOARD-GRID GAP</div>
+                <div class="compare-row">
+                    <span class="compare-before">16px</span>
+                    <span class="compare-after">12px</span>
+                    <span class="compare-delta">-25%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Section 3: 三种模式 ============ -->
     <section class="section">
         <div class="section-head">
-            <div class="section-tag"><i class="fa-solid fa-grid-2"></i> THREE MODES</div>
-            <h2>当前只保留三种正式布局模式</h2>
-            <p class="section-desc">展示感不再依赖翻页动画，而是通过章节节奏、卡片密度和首屏构图来实现。</p>
+            <div class="section-tag"><i class="fa-solid fa-layer-group"></i> THREE MODES</div>
+            <h2>当前保留的三种正式布局模式</h2>
             <div class="section-divider"></div>
+            <p class="section-desc">展示感不依赖翻页动画，通过章节节奏、卡片密度和首屏构图来实现。所有模式均遵循 v1.3.0 密度基准。</p>
         </div>
         <div class="grid-3">
-            <article class="card-light">
-                <div class="metric">
-                    <div class="metric-value" style="color: var(--lavender-500);">A</div>
-                    <div class="metric-label">Editorial</div>
+            <article class="mode-card">
+                <div class="mode-card-head">
+                    <div class="mode-letter" style="color: var(--lavender-500);">A</div>
+                    <div class="mode-head-text">
+                        <div class="mode-name">EDITORIAL</div>
+                        <h3>长滚动叙事</h3>
+                    </div>
                 </div>
-                <h3>长滚动叙事</h3>
-                <p>适合分析报告、方案展示、产品介绍。通过章节分隔和卡片层次制造连续阅读节奏。</p>
+                <p>通过章节分隔和卡片层次制造连续阅读节奏，适合承载大量结构化内容。</p>
+                <div class="mode-usage">
+                    <strong>适合</strong>：分析报告、复盘、方案展示、产品介绍<br>
+                    <strong>覆盖</strong>：80% 场景的默认选择
+                </div>
             </article>
-            <article class="card-light">
-                <div class="metric">
-                    <div class="metric-value" style="color: var(--mint-500);">B</div>
-                    <div class="metric-label">Dashboard</div>
+            <article class="mode-card">
+                <div class="mode-card-head">
+                    <div class="mode-letter" style="color: var(--mint-500);">B</div>
+                    <div class="mode-head-text">
+                        <div class="mode-name">DASHBOARD</div>
+                        <h3>高密度看板</h3>
+                    </div>
                 </div>
-                <h3>高密度看板</h3>
-                <p>适合数据汇总、状态跟踪、多维对比。一屏给出全貌，重点信息用指标卡和状态条承载。</p>
+                <p>一屏给出全貌，重点信息用指标卡和状态条承载。v1.3.0 下单屏可多容纳约 20% 信息。</p>
+                <div class="mode-usage">
+                    <strong>适合</strong>：数据汇总、状态跟踪、多维对比<br>
+                    <strong>特点</strong>：网格密集、单屏可读
+                </div>
             </article>
-            <article class="card-light">
-                <div class="metric">
-                    <div class="metric-value" style="color: var(--sky-500);">C</div>
-                    <div class="metric-label">Single</div>
+            <article class="mode-card">
+                <div class="mode-card-head">
+                    <div class="mode-letter" style="color: var(--sky-500);">C</div>
+                    <div class="mode-head-text">
+                        <div class="mode-name">SINGLE</div>
+                        <h3>单屏聚焦</h3>
+                    </div>
                 </div>
-                <h3>单屏聚焦</h3>
-                <p>适合活动海报、单页简介、邀请函。信息量小，但要求首屏足够完整且有冲击力。</p>
+                <p>信息量小但要求首屏完整、视觉冲击力足够。居中排版，一页搞定。</p>
+                <div class="mode-usage">
+                    <strong>适合</strong>：活动海报、单页简介、邀请函<br>
+                    <strong>特点</strong>：极简、聚焦、精致
+                </div>
             </article>
         </div>
     </section>
 
+    <!-- ============ Section 4: 硬约束 ============ -->
     <section class="section">
         <div class="section-head">
             <div class="section-tag"><i class="fa-solid fa-list-check"></i> RELEASE RULES</div>
             <h2>正式版输出的硬约束</h2>
-            <p class="section-desc">以下规则来自当前 skill 与验收清单，示例页本身也按这些限制实现。</p>
             <div class="section-divider"></div>
+            <p class="section-desc">以下 12 条规则来自 v1.3.0 的 SKILL.md 和验收清单，示例页本身也按这些限制实现。</p>
         </div>
         <div class="grid-2">
-            <div class="card-light">
-                <h4>必须满足</h4>
-                <ul class="check-list">
+            <div class="rules-card must">
+                <h4><i class="fa-solid fa-circle-check"></i> 必须满足（6 条）</h4>
+                <ul class="rule-list">
                     <li><i class="fa-solid fa-check"></i><span>单文件 HTML，样式全部内联在 <code>&lt;style&gt;</code> 中</span></li>
-                    <li><i class="fa-solid fa-check"></i><span>默认可见、无需点击、无需等待，打印预览即最终呈现</span></li>
-                    <li><i class="fa-solid fa-check"></i><span>只依赖 Google Fonts 和 Font Awesome CDN</span></li>
+                    <li><i class="fa-solid fa-check"></i><span>默认可见，无需点击、滚动或等待动画</span></li>
+                    <li><i class="fa-solid fa-check"></i><span>仅依赖 Google Fonts 和 Font Awesome CDN</span></li>
                     <li><i class="fa-solid fa-check"></i><span>桌面、平板、手机都有基础响应式回落</span></li>
+                    <li><i class="fa-solid fa-check"></i><span>单张卡片至少承载 3 条有效信息（v1.3.0 新增）</span></li>
+                    <li><i class="fa-solid fa-check"></i><span>grid gap ≤ card padding，避免密度倒挂（v1.3.0 新增）</span></li>
                 </ul>
             </div>
-            <div class="card-light">
-                <h4>明确禁止</h4>
-                <ul class="check-list">
-                    <li><i class="fa-solid fa-check"></i><span>禁止 animation、transition、scroll-snap、hover 动效</span></li>
-                    <li><i class="fa-solid fa-check"></i><span>禁止 JavaScript 交互逻辑和默认隐藏内容</span></li>
-                    <li><i class="fa-solid fa-check"></i><span>禁止 Inter、Roboto、Arial 等通用字体作为正式输出主字体</span></li>
-                    <li><i class="fa-solid fa-check"></i><span>禁止把内容堆成普通文档排版，必须有卡片和节奏</span></li>
+            <div class="rules-card nope">
+                <h4><i class="fa-solid fa-circle-xmark"></i> 明确禁止（6 条）</h4>
+                <ul class="rule-list">
+                    <li><i class="fa-solid fa-xmark"></i><span>任何 <code>animation</code> / <code>transition</code> / <code>hover</code> 效果</span></li>
+                    <li><i class="fa-solid fa-xmark"></i><span>JavaScript 交互逻辑和默认隐藏内容</span></li>
+                    <li><i class="fa-solid fa-xmark"></i><span>Inter / Roboto / Arial 等通用字体</span></li>
+                    <li><i class="fa-solid fa-xmark"></i><span>emoji、破折号等 AI 味元素</span></li>
+                    <li><i class="fa-solid fa-xmark"></i><span>卡片只装 1 条信息、空白撑高卡片（v1.3.0 新增）</span></li>
+                    <li><i class="fa-solid fa-xmark"></i><span>section 外壳大 padding 套 card 大 padding（v1.3.0 新增）</span></li>
                 </ul>
             </div>
         </div>
     </section>
 
+    <!-- ============ Section 5: 安装 ============ -->
     <section class="section">
         <div class="section-head">
             <div class="section-tag"><i class="fa-solid fa-download"></i> INSTALL</div>
-            <h2>安装与使用</h2>
-            <p class="section-desc">正式版 release 会附带更新后的 <code>html-beautifier.skill</code> 资产，安装后即可直接调用。</p>
+            <h2>安装与调用</h2>
             <div class="section-divider"></div>
+            <p class="section-desc">v1.3.0 release 会附带更新后的 <span class="inline-code">html-beautifier.skill</span> 资产，兼容所有主流 AI 编程助手。</p>
         </div>
         <div class="grid-2">
-            <div class="card-light">
-                <h4 style="margin-bottom: 12px;">下载并安装</h4>
-                <div class="code-block">mkdir -p ~/.claude/skills
-curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.2.2/html-beautifier.skill \
+            <div class="install-card">
+                <h4><span class="num-dot">1</span> 下载并安装 skill</h4>
+<div class="code-block">mkdir -p ~/.claude/skills
+curl -L https://github.com/HeiGeAi/html-beautifier/releases\
+/download/v1.3.0/html-beautifier.skill \
   -o ~/.claude/skills/html-beautifier.skill</div>
             </div>
-            <div class="card-light">
-                <h4 style="margin-bottom: 12px;">开始使用</h4>
-                <div class="code-block">/html-beautifier 把这个报告做成网页
+            <div class="install-card">
+                <h4><span class="num-dot">2</span> 调用生成页面</h4>
+<div class="code-block">/html-beautifier 把这个报告做成网页
 
-场景：数据报告
-风格：商务专业
-模式：Dashboard</div>
+<span class="cmt"># 场景：数据报告</span>
+<span class="cmt"># 风格：商务专业</span>
+<span class="cmt"># 模式：Dashboard</span></div>
             </div>
         </div>
     </section>
 
     <footer class="footer">
-        <p><strong>HTML Beautifier v1.2.2</strong> · Static Showcase · MIT License</p>
+        <strong>HTML Beautifier v1.3.0</strong>
+        <span class="dot"></span>
+        <span>Density Patch</span>
+        <span class="dot"></span>
+        <span>MIT License</span>
+        <span class="dot"></span>
+        <span>Made by Blake 黑哥</span>
     </footer>
+
 </div>
 </body>
 </html>

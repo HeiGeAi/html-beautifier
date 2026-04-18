@@ -9,7 +9,7 @@ description: >
   "参考某网页做更美版本"、"把报告做成网页"时，必须使用此 skill。
   在生成前会与用户确认风格偏好和使用场景，确保输出符合需求。
 author: Blake 黑哥
-version: 1.2.2
+version: 1.3.0
 compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "OpenClaw", "Hermes", "ChatGPT", "Claude.ai", "通用 AI 助手"]
 ---
 
@@ -21,11 +21,17 @@ compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "O
 
 ## 核心设计理念
 
-「卡片即信息容器，留白即呼吸感，节奏即叙事力」
+「卡片即信息容器，密度即专业感，节奏即叙事力」
 
-所有内容通过精心设计的卡片、标签、图标组合来承载，不堆砌文字。
-每一个模块都是一张完整的视觉海报，有清晰的信息层次。
+所有内容通过精心设计的卡片、标签、图标组合来承载，信息密度要够。
+留白是为节奏服务，不是为留白服务：克制的呼吸感强过稀疏的空壳。
+每张卡片实打实装信息，避免「空壳套空壳」、一行标题配几行描述就交差。
 页面整体有讲故事的节奏感，从首屏的气场到收尾的行动号召，一气呵成。
+
+**密度与留白的正确关系**：
+- 密度优先，留白其次。先让信息装满，再决定哪里需要呼吸
+- 留白出现在模块与模块之间，而不是卡片与内容之间
+- 宁可一张卡片内容多一点挤一点，也不要内容少到被空白撑高
 
 ## 使用流程（重要）
 
@@ -221,6 +227,36 @@ compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "O
 5. **num-dot**：编号圆点，用于列表和步骤序号
 6. **icon-box**：方形圆角图标框，承载 Font Awesome 图标
 
+## 密度基准（重要）
+
+这是 v1.3.0 新增的硬约束，用于对抗「稀疏空壳」问题。生成页面时必须满足以下密度标准。
+
+### 卡片密度
+
+- 单张卡片至少承载 **3 条有效信息**：典型组合是「图标 + 标题 + 2-3 行描述」或「数值 + 标签 + 变化率 + 趋势」
+- 卡片高度由内容决定，**不允许让大段垂直空白撑高卡片**
+- card 默认 padding：**18-20px**，不要写 22px 以上（Hero 级大卡除外）
+- 如果卡片内容天然很少，选择减小 padding 到 14-16px，而不是保持大 padding 让卡片空荡
+
+### 布局密度
+
+- **grid gap ≤ card padding** 是硬规则，避免密度倒挂
+- 默认节奏：grid-4 gap 12px、grid-3 gap 14px、grid-2 gap 16px
+- 不要为了「呼吸感」把 gap 堆到 20px 以上
+
+### 章节密度
+
+- section-head（eyebrow + 标题 + 描述 + divider）总高度控制在 **100px 以内**
+- eyebrow 与 h2 之间 margin 控制在 4-8px
+- h2 与 section-divider 紧贴（h2 margin-bottom 4-6px），让 divider 做视觉锚点而不是独立元素
+- section 与 section 之间 28-36px 节奏，不要 48px+
+
+### 首屏密度
+
+- 首屏（1080px 视口内）至少能看到 **Hero + 半个内容模块**
+- Hero 不要占满首屏：Hero 总高度 ≤ 480px
+- Hero 内部至少承载 4 类信息：eyebrow 标签、大标题、描述、badges 或 meta
+
 ## 严格禁止
 
 - ❌ 任何 CSS 动画（animation / transition / transform 动效）
@@ -230,7 +266,10 @@ compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "O
 - ❌ 紫色渐变配白底的「AI 味」配色
 - ❌ 标题中使用破折号（——）
 - ❌ 使用 emoji，统一用 Font Awesome 图标
-- ❌ 大段文字堆砌，所有信息必须通过卡片结构承载
+- ❌ 信息密度不足：单张卡片只装 1 条信息、大段垂直空白撑高卡片
+- ❌ padding 堆叠：section 外壳大 padding 套 card 大 padding，双层内边距把内容区挤窄
+- ❌ 密度倒挂：grid gap 大于 card padding，导致卡间比卡内还松
+- ❌ section-head 五件套占用超过 100px 垂直空间只承载一行标题
 - ❌ reveal 动效导致截图或打印出现空白
 
 ## 输出规范
