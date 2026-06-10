@@ -314,7 +314,7 @@
         }
         .compare-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-top: 16px;
         }
@@ -533,7 +533,6 @@
             .grid-4 { grid-template-columns: 1fr 1fr; }
             .hero-stats { grid-template-columns: 1fr 1fr; gap: 14px 0; }
             .hero-stat:nth-child(2) { border-right: none; }
-            .compare-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -664,7 +663,7 @@
             <div class="section-tag"><i class="fa-solid fa-code-compare"></i> BEFORE · AFTER</div>
             <h2>关键数值收紧对照</h2>
             <div class="section-divider"></div>
-            <p class="section-desc">从八个核心参数看 v1.3.0 的调整幅度。每个数字都有明确的视觉效果：让卡片更实、让节奏更紧、让首屏能看到更多内容。</p>
+            <p class="section-desc">从九个核心参数看 v1.3.0 的调整幅度。每个数字都有明确的视觉效果：让卡片更实、让节奏更紧、让首屏能看到更多内容。</p>
         </div>
         <div class="compare-grid">
             <div class="compare-cell">
@@ -689,6 +688,14 @@
                     <span class="compare-before">80+48</span>
                     <span class="compare-after">56+36</span>
                     <span class="compare-delta">-28%</span>
+                </div>
+            </div>
+            <div class="compare-cell">
+                <div class="compare-label">EDITORIAL-FOOTER</div>
+                <div class="compare-row">
+                    <span class="compare-before">48px</span>
+                    <span class="compare-after">32px</span>
+                    <span class="compare-delta">-33%</span>
                 </div>
             </div>
             <div class="compare-cell">
