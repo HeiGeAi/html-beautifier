@@ -108,18 +108,14 @@
 ### TL;DR
 
 ```bash
-# 1. 下载 skill 文件
-curl -O https://github.com/HeiGeAi/html-beautifier/releases/latest/download/html-beautifier.skill
-
-# 2. 根据你使用的平台安装
+# 1. 克隆仓库到 skills 目录
 # Claude Code / Cursor / Windsurf / Cline:
-mkdir -p ~/.claude/skills
-cp html-beautifier.skill ~/.claude/skills/
+git clone https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
 
 # ChatGPT / Claude.ai / 其他平台:
 # 直接将 SKILL.md 内容作为 system prompt 或自定义指令使用
 
-# 3. 使用
+# 2. 使用
 # 在 AI 助手中输入：
 把这个报告做成网页
 ```
@@ -131,10 +127,8 @@ cp html-beautifier.skill ~/.claude/skills/
 **适用于**：Claude Code、Cursor、Windsurf、Cline
 
 ```bash
-# 下载并安装
-mkdir -p ~/.claude/skills
-curl -L https://github.com/HeiGeAi/html-beautifier/releases/latest/download/html-beautifier.skill \
-  -o ~/.claude/skills/html-beautifier.skill
+# 克隆仓库到 skills 目录
+git clone https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
 
 # 使用
 /html-beautifier 把这个报告做成网页
@@ -161,13 +155,10 @@ curl -L https://github.com/HeiGeAi/html-beautifier/releases/latest/download/html
 ```bash
 # 克隆仓库
 git clone https://github.com/HeiGeAi/html-beautifier.git
-cd html-beautifier
 
-# 打包 skill
-tar -czf html-beautifier.skill SKILL.md references/
-
-# 安装（根据平台选择）
-cp html-beautifier.skill ~/.claude/skills/  # Claude Code 等
+# 将整个目录复制到 skills 目录（Claude Code 等）
+mkdir -p ~/.claude/skills
+cp -r html-beautifier ~/.claude/skills/
 # 或直接使用 SKILL.md 作为 prompt
 ```
 

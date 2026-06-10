@@ -34,9 +34,7 @@
 
 ### 安装方法
 ```bash
-mkdir -p ~/.claude/skills
-curl -L https://github.com/HeiGeAi/html-beautifier/releases/download/v1.3.0/html-beautifier.skill \
-  -o ~/.claude/skills/html-beautifier.skill
+git clone https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
 ```
 
 ## 支持平台

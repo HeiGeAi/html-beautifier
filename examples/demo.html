@@ -828,15 +828,13 @@
             <div class="section-tag"><i class="fa-solid fa-download"></i> INSTALL</div>
             <h2>安装与调用</h2>
             <div class="section-divider"></div>
-            <p class="section-desc">v1.3.0 release 会附带更新后的 <span class="inline-code">html-beautifier.skill</span> 资产，兼容所有主流 AI 编程助手。</p>
+            <p class="section-desc">通过 <span class="inline-code">git clone</span> 将整个 skill 目录装入本地，兼容所有主流 AI 编程助手。</p>
         </div>
         <div class="grid-2">
             <div class="install-card">
-                <h4><span class="num-dot">1</span> 下载并安装 skill</h4>
-<div class="code-block">mkdir -p ~/.claude/skills
-curl -L https://github.com/HeiGeAi/html-beautifier/releases\
-/download/v1.3.0/html-beautifier.skill \
-  -o ~/.claude/skills/html-beautifier.skill</div>
+                <h4><span class="num-dot">1</span> 克隆并安装 skill</h4>
+<div class="code-block">git clone https://github.com/HeiGeAi/html-beautifier.git \
+  ~/.claude/skills/html-beautifier</div>
             </div>
             <div class="install-card">
                 <h4><span class="num-dot">2</span> 调用生成页面</h4>

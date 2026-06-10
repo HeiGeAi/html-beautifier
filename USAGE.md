@@ -2,33 +2,28 @@
 
 ## 安装方法
 
-### 方法 1：直接下载 .skill 文件（推荐）
+### 方法 1：git clone 安装（推荐）
 
-1. 从 [Releases](https://github.com/HeiGeAi/html-beautifier/releases) 下载最新的 `html-beautifier.skill` 文件
-2. 将文件复制到 Claude Code 的 skills 目录：
+1. 将仓库克隆到 Claude Code 的 skills 目录：
    ```bash
-   mkdir -p ~/.claude/skills
-   cp html-beautifier.skill ~/.claude/skills/
+   git clone https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
    ```
-3. 重启 Claude Code 或重新加载配置
+2. 重启 Claude Code 或重新加载配置
 
-### 方法 2：从源码安装
+### 方法 2：手动复制
 
 1. 克隆本仓库：
    ```bash
    git clone https://github.com/HeiGeAi/html-beautifier.git
-   cd html-beautifier
    ```
 
-2. 打包成 .skill 文件：
+2. 将整个目录复制到 Claude Code 的 skills 目录：
    ```bash
-   tar -czf html-beautifier.skill SKILL.md references/
+   mkdir -p ~/.claude/skills
+   cp -r html-beautifier ~/.claude/skills/
    ```
 
-3. 安装到 Claude Code：
-   ```bash
-   cp html-beautifier.skill ~/.claude/skills/
-   ```
+3. 重启 Claude Code 或重新加载配置
 
 ## 基础使用
 
