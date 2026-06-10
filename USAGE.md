@@ -6,7 +6,7 @@
 
 1. 将仓库克隆到 Claude Code 的 skills 目录：
    ```bash
-   git clone https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
+   git clone --depth 1 https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
    ```
 2. 重启 Claude Code 或重新加载配置
 
@@ -14,7 +14,7 @@
 
 1. 克隆本仓库：
    ```bash
-   git clone https://github.com/HeiGeAi/html-beautifier.git
+   git clone --depth 1 https://github.com/HeiGeAi/html-beautifier.git
    ```
 
 2. 将整个目录复制到 Claude Code 的 skills 目录：

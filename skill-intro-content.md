@@ -34,7 +34,7 @@
 
 ### 安装方法
 ```bash
-git clone https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
+git clone --depth 1 https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
 ```
 
 ## 支持平台

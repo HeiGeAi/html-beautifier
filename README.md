@@ -110,7 +110,7 @@
 ```bash
 # 1. 克隆仓库到 skills 目录
 # Claude Code / Cursor / Windsurf / Cline:
-git clone https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
+git clone --depth 1 https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
 
 # ChatGPT / Claude.ai / 其他平台:
 # 直接将 SKILL.md 内容作为 system prompt 或自定义指令使用
@@ -128,7 +128,7 @@ git clone https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-b
 
 ```bash
 # 克隆仓库到 skills 目录
-git clone https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
+git clone --depth 1 https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-beautifier
 
 # 使用
 /html-beautifier 把这个报告做成网页
@@ -138,7 +138,7 @@ git clone https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-b
 
 **适用于**：ChatGPT、Claude.ai、Aider、OpenClaw、Hermes
 
-1. 下载本仓库的 `SKILL.md` 文件
+1. 打开本仓库的 `SKILL.md` 文件（GitHub 网页或 git clone 后本地查看均可）
 2. 将内容复制到 AI 助手的 system prompt 或自定义指令中
 3. 直接对话使用，无需特殊命令
 
@@ -154,7 +154,7 @@ git clone https://github.com/HeiGeAi/html-beautifier.git ~/.claude/skills/html-b
 
 ```bash
 # 克隆仓库
-git clone https://github.com/HeiGeAi/html-beautifier.git
+git clone --depth 1 https://github.com/HeiGeAi/html-beautifier.git
 
 # 将整个目录复制到 skills 目录（Claude Code 等）
 mkdir -p ~/.claude/skills
@@ -290,10 +290,10 @@ done
 
 | 平台 | 文件读写 | 用户交互 | 网页抓取 | 安装方式 |
 |------|---------|---------|---------|---------|
-| **Claude Code** | ✅ | ✅ | ✅ | .skill 文件 |
-| **Cursor** | ✅ | ✅ | ✅ | .skill 文件 |
-| **Windsurf** | ✅ | ✅ | ✅ | .skill 文件 |
-| **Cline** | ✅ | ✅ | ⚠️ | .skill 文件 |
+| **Claude Code** | ✅ | ✅ | ✅ | git clone 整目录 |
+| **Cursor** | ✅ | ✅ | ✅ | git clone 整目录 |
+| **Windsurf** | ✅ | ✅ | ✅ | git clone 整目录 |
+| **Cline** | ✅ | ✅ | ⚠️ | git clone 整目录 |
 
 ### 基础支持 ⚠️
 
