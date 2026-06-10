@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2026-06-10
+
+### Changed
+- 🔄 安装方式全面改为 git clone 整目录（含 README 平台兼容性表、.gitignore 残留配置清理），所有 clone 命令统一加 `--depth 1`
+- 🔄 三份 references 间距口径统一到 v1.3.0 密度基准（section 间 28-36px），移除 60px+ 旧口径
+- 🔄 design-system.md 章节编号重排为连续 1-14，修复目录死链；组装示例移除违反密度基准的 inline padding
+- 🔄 design-system.md 响应式样式改为只引用现有组件类，移除商业项目残留类名
+- 🔄 quality-checklist.md 修复方法改为引用现有组件（metric-card / dashboard-summary / emphasis-bar 等），交付路径改为通用表述
+- 🔄 「简约优雅」风格描述统一为「克制配色、低装饰密度，仍遵守密度基准」口径（SKILL.md / USAGE.md）
+- 🔄 demo 参数对照统一为 9 项（补 EDITORIAL-FOOTER 格），介绍页设计理念引语对齐「密度即专业感」
+- 🎨 介绍页头图压缩 2.83MB → 194KB，介绍页字体栈补中文兜底
+
+### Fixed
+- 🐛 CHANGELOG / README / LICENSE 历史年份 2024 → 2026
+- 🐛 README 锚点断链 2 处，项目结构树补全 CHANGELOG.md / LICENSE / USAGE.md
+- 🐛 USAGE Discussions 死链改为 Issues，批量示例补 `claude -p` 非交互标志
+- 🐛 visual-learning-guide.md 重复的「模式 B」改为模式 C
+- 🐛 在线演示链接改为 GitHub Pages 地址
+
 ## [1.3.0] - 2026-04-18
 
 ### Added（反向锚定）
@@ -62,7 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 🎨 演示所有核心组件和马卡龙色系
 - 📚 可作为产品介绍页面的参考模板
 
-## [1.2.0] - 2024-04-15
+## [1.2.0] - 2026-04-15
 
 ### Changed
 - 🔄 移除 Deck（幻灯片）模式，简化为三种布局模式
@@ -83,7 +102,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ✅ 打印效果与屏幕显示完全一致
 - ✅ 更简洁的组件库和模板
 
-## [1.1.0] - 2024-04-15
+## [1.1.0] - 2026-04-15
 
 ### Added
 - ✅ 跨平台兼容性支持（Cross-platform compatibility）
@@ -102,7 +121,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 新增 .gitignore 配置
 - 新增 examples/ 目录和演示文件
 
-## [1.0.0] - 2024-04-15
+## [1.0.0] - 2026-04-15
 
 ### Added
 - 🎉 Initial release of HTML Beautifier
@@ -158,7 +177,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
-### v1.0.0 (2024-04-15)
+### v1.0.0 (2026-04-15)
 First stable release with complete feature set.
 
 ---

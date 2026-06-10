@@ -103,14 +103,14 @@ AI 会：
 为多个文件生成 HTML：
 
 ```bash
-# 方法 1：循环处理
+# 方法 1：循环处理（-p 为非交互模式）
 for file in reports/*.md; do
-  echo "/html-beautifier 把 $file 做成网页" | claude
+  echo "/html-beautifier 把 $file 做成网页" | claude -p
 done
 
 # 方法 2：使用脚本
 cat files.txt | while read file; do
-  claude "/html-beautifier 把 $file 做成网页"
+  claude -p "/html-beautifier 把 $file 做成网页"
 done
 ```
 
@@ -235,7 +235,7 @@ A: 可以！本项目采用 MIT 许可证，可自由用于商业和个人项目
 ## 获取帮助
 
 - **GitHub Issues**: [提交问题](https://github.com/HeiGeAi/html-beautifier/issues)
-- **讨论区**: [GitHub Discussions](https://github.com/HeiGeAi/html-beautifier/discussions)
+- **功能建议**: [GitHub Issues](https://github.com/HeiGeAi/html-beautifier/issues)（暂未开启 Discussions，建议也走 Issues）
 - **微信**: 488137（添加请注明来意）
 
 ---

@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.3.1-blue.svg)
 ![Claude](https://img.shields.io/badge/Claude-Skill-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -10,7 +10,7 @@
 
 将任何文件转换为专业级视觉化 HTML 页面
 
-[快速开始](#快速开始-quick-start) • [在线演示](#在线演示) • [功能特性](#核心能力) • [使用指南](#使用指南)
+[快速开始](#快速开始-quick-start) • [在线演示](#在线演示) • [功能特性](#核心能力-core-capabilities) • [使用指南](#使用指南-usage-guide)
 
 </div>
 
@@ -268,9 +268,9 @@ AI 会：
 
 **Claude Code / Cursor / Windsurf / Cline**:
 ```bash
-# 为多个 Markdown 文件生成 HTML
+# 为多个 Markdown 文件生成 HTML（-p 为非交互模式）
 for file in reports/*.md; do
-  echo "/html-beautifier 把 $file 做成网页" | claude
+  echo "/html-beautifier 把 $file 做成网页" | claude -p
 done
 ```
 
@@ -333,6 +333,9 @@ html-beautifier/
 │   ├── skill-introduction.html # 官方介绍页
 │   └── assets/
 │       └── intro-header.png   # 介绍页顶部视觉图
+├── USAGE.md                    # 详细使用指南
+├── CHANGELOG.md                # 版本更新历史
+├── LICENSE                     # MIT 许可证
 └── README.md                   # 本文件
 ```
 
@@ -340,8 +343,10 @@ html-beautifier/
 
 ## 在线演示
 
-查看 [examples/skill-introduction.html](examples/skill-introduction.html) 了解官方介绍页，
-查看 [examples/demo.html](examples/demo.html) 了解正式版静态示例页。
+- 官方介绍页：[heigeai.github.io/html-beautifier/examples/skill-introduction.html](https://heigeai.github.io/html-beautifier/examples/skill-introduction.html)
+- 正式版静态示例页：[heigeai.github.io/html-beautifier/examples/demo.html](https://heigeai.github.io/html-beautifier/examples/demo.html)
+
+也可以直接查看仓库内源文件：[examples/skill-introduction.html](examples/skill-introduction.html)、[examples/demo.html](examples/demo.html)。
 
 当前示例展示了：
 - 顶部视觉图 + 正式版版本信息
@@ -388,6 +393,12 @@ html-beautifier/
 
 ## 版本历史 Version History
 
+### v1.3.1 (2026-06-10)
+- 🔄 安装方式全面改为 git clone 整目录，所有命令统一加 `--depth 1`
+- 🔄 references 间距口径统一到密度基准，design-system.md 章节编号与目录修复
+- 🐛 修复锚点断链、Discussions 死链、历史年份、批量示例缺 `-p` 等文档问题
+- 🎨 介绍页头图压缩到 194KB，示例页文案与密度口径对齐
+
 ### v1.3.0 (2026-04-18)
 - ✨ 新增「密度基准」硬约束：卡片密度、布局密度、章节密度、首屏密度
 - ✨ 新增反向锚定：严格禁止列表新增 4 条反稀疏反模式，致命项扩展到 6 条
@@ -403,7 +414,20 @@ html-beautifier/
 - ✅ 为官方介绍页加入顶部视觉图，并同步成正式版静态示例
 - ✅ 重写 `examples/demo.html`，与当前三模式静态体系保持一致
 
-### v1.0.0 (2024-04-15)
+### v1.2.1 (2026-04-16)
+- ✨ 新增官方介绍页面模板 `examples/skill-introduction.html`
+- 📚 完整展示 Editorial 模式、核心组件和马卡龙色系
+
+### v1.2.0 (2026-04-15)
+- 🔄 移除 Deck（幻灯片）模式，简化为三种布局模式
+- 🔄 移除所有动画效果（transition、animation、scroll-snap），打印即最终呈现
+- 📝 精简 design-system.md，从 1188 行减少到 866 行
+
+### v1.1.0 (2026-04-15)
+- ✅ 跨平台兼容性支持，覆盖 Claude Code / Cursor / Windsurf / Cline / Aider 等
+- 📝 README 改为双语格式，新增 USAGE.md、LICENSE、examples/ 目录
+
+### v1.0.0 (2026-04-15)
 - 🎉 首次发布
 - ✅ 历史版本曾支持四种布局模式（Deck/Editorial/Dashboard/Single）
 - ✅ 完整的马卡龙六色设计系统
