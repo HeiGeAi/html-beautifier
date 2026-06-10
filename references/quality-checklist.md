@@ -33,9 +33,9 @@
 - 从头到尾都是白底 + 卡片，单调
 
 **修复方法**：
-- 模块间距至少 60px
+- 模块间距按密度基准控制在 28-36px，靠分隔线和底色变化做边界，不靠大留白
 - 每 3-4 个模块后插入一个节奏变化点
-- 可以用深色段（dark-section）、大数据展示（stats）、公式图（journey-formula）来打破节奏
+- 可以用指标卡组（metric-card）、汇总条（dashboard-summary）、强调条（emphasis-bar）、引用块（editorial-quote）来打破节奏
 
 ## B2. 信息密度（v1.3.0 新增，必检）
 
@@ -212,7 +212,7 @@
 **修复方法**：
 - 首屏添加"报告"标识（英文标签：REPORT）
 - 第二屏必须是 Executive Summary 或 Key Highlights
-- 关键数据用 stats-grid 展示
+- 关键数据用 metric-card 网格或 dashboard-summary 汇总条展示
 - 建议/风险用独立的 card-light 卡片承载
 - 模块顺序：封面 → 摘要 → 关键发现 → 详细分析 → 建议 → 下一步
 
@@ -269,8 +269,8 @@
 **修复**：
 - 添加 bg-dot 点阵背景
 - 标题加大到 44px，使用 Noto Serif SC
-- 添加品牌 icon（cover-brand）
-- 添加英文标签（cover-tag）
+- 添加品牌 icon（icon-box）
+- 添加大写英文小标签（12px + letter-spacing 0.22em + uppercase）
 - 添加渐变强调词（gt-*）
 
 ### 问题 2：卡片不统一
@@ -313,7 +313,7 @@
 
 在交付给用户前，最后检查：
 
-1. [ ] 文件已保存到正确位置（桌面 claudecode 输出文件夹）
+1. [ ] 文件已保存到正确位置（用户指定位置或当前项目目录）
 2. [ ] 文件名清晰易懂（如 product-intro.html）
 3. [ ] 在浏览器中打开确认无误
 4. [ ] 打印预览确认无空白

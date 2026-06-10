@@ -35,9 +35,9 @@
 8. [badge 药丸标签](#8-badge)
 9. [num-dot 编号圆点](#9-num-dot)
 10. [icon-box 图标容器](#10-icon-box)
-11. [Editorial 长滚动组件](#11-editorial)
-12. [Dashboard 看板组件](#12-dashboard)
-13. [工具类 Utilities](#13-utilities)
+11. [Dashboard 看板组件](#11-dashboard-看板组件)
+12. [Editorial 编辑式组件](#12-editorial-编辑式组件)
+13. [工具类 Utilities](#13-工具类)
 14. [组装示例](#14-组装示例)
 
 ---
@@ -139,21 +139,19 @@ body {
 /* 基础响应式 */
 @media (max-width: 1024px) {
     .section-page { padding: 32px 24px; }
-    .section-title { font-size: 28px !important; }
-    .cover h1, .cover-title { font-size: 34px !important; }
+    .editorial-hero h1, .dashboard-header h1 { font-size: 34px !important; }
     .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr 1fr !important; }
-    .grid-2-1 { grid-template-columns: 1fr !important; }
-    .cap-top { grid-template-columns: 1fr 1fr !important; }
-    .gold-cards { grid-template-columns: 1fr 1fr !important; }
+    .grid-2-1, .grid-1-2 { grid-template-columns: 1fr !important; }
+    .dashboard-grid.cols-4 { grid-template-columns: 1fr 1fr !important; }
+    .dashboard-grid.cols-2-1, .dashboard-grid.cols-1-2 { grid-template-columns: 1fr !important; }
 }
 
 @media (max-width: 640px) {
     .section-page { padding: 24px 16px; }
     .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr !important; }
-    .about-grid { grid-template-columns: 1fr !important; }
-    .team-grid { grid-column: span 1 !important; }
-    .challenge-grid { grid-template-columns: 1fr !important; }
-    .arch-items { grid-template-columns: 1fr !important; }
+    .dashboard-grid.cols-2, .dashboard-grid.cols-3, .dashboard-grid.cols-4 { grid-template-columns: 1fr !important; }
+    .side-by-side { grid-template-columns: 1fr !important; }
+    .dashboard-summary { flex-direction: column; gap: 12px; }
 }
 ```
 
@@ -564,7 +562,7 @@ HTML 骨架：
 
 ---
 
-## 22. Dashboard 看板组件
+## 11. Dashboard 看板组件
 
 以下是 Dashboard 模式专用的扩展组件。
 
@@ -625,7 +623,7 @@ HTML 骨架：
 
 ---
 
-## 23. Editorial 编辑式组件
+## 12. Editorial 编辑式组件
 
 ### 引用块
 
@@ -671,7 +669,7 @@ HTML 骨架：
 
 ---
 
-## 24. 工具类
+## 13. 工具类
 
 ```css
 /* 网格 */
@@ -755,11 +753,11 @@ HTML 骨架：
         <h2>章节二</h2>
         <div class="section-divider"></div>
         <div class="grid-2">
-            <div class="card-light" style="padding: 24px; border-radius: 14px;">
+            <div class="card-light">
                 <h3>卡片标题</h3>
                 <p>卡片内容</p>
             </div>
-            <div class="card-light" style="padding: 24px; border-radius: 14px;">
+            <div class="card-light">
                 <h3>卡片标题</h3>
                 <p>卡片内容</p>
             </div>
