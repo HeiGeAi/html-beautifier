@@ -8,9 +8,11 @@ description: >
   当用户要求"做成 HTML"、"美化这个文件"、"生成网页版"、"做个好看的页面"、
   "参考某网页做更美版本"、"把报告做成网页"时，必须使用此 skill。
   在生成前会与用户确认风格偏好和使用场景，确保输出符合需求。
-author: Blake 黑哥
-version: 1.3.1
-compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "OpenClaw", "Hermes", "ChatGPT", "Claude.ai", "通用 AI 助手"]
+license: MIT
+metadata:
+  author: Blake 黑哥
+  version: 1.3.1
+  compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "OpenClaw", "Hermes", "ChatGPT", "Claude.ai", "通用 AI 助手"]
 ---
 
 # HTML Beautifier（多功能 HTML 美化系统）
