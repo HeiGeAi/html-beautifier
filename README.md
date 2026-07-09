@@ -482,3 +482,7 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 Made by Blake 黑哥
 
 </div>
+
+## 更多开源工具
+
+本项目属于黑哥 AI 的开源武器库。全部开源项目的清单、用途和协议,见 [heigeai.com/opensource](https://www.heigeai.com/opensource/)。
