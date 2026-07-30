@@ -72,8 +72,8 @@ git clone --depth 1 https://github.com/HeiGeAi/html-beautifier.git ~/.claude/ski
 
 ## 版本信息
 
-当前版本：v1.3.1
-发布日期：2026-06-10
+当前版本：v1.3.2
+发布日期：2026-07-31
 作者：Blake 黑哥
 许可证：MIT License
 

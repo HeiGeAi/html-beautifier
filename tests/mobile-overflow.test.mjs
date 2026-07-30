@@ -15,6 +15,13 @@ const chromeCandidates = [
 ].filter(Boolean);
 const chrome = chromeCandidates.find((candidate) => fs.existsSync(candidate));
 
+test('public examples expose the current release version', () => {
+  for (const name of ['demo.html', 'skill-introduction.html']) {
+    const source = fs.readFileSync(path.join(ROOT, 'examples', name), 'utf8');
+    assert.match(source, /v1\.3\.2/);
+  }
+});
+
 test('demo does not overflow horizontally at a 390px mobile viewport', async (t) => {
   if (!chrome) {
     t.skip('Chrome or Chromium is required for the browser regression test');

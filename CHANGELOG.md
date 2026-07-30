@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2] - 2026-07-31
+
+### Fixed
+- 修复移动端安装代码块在 390px 视口造成的 1px 横向溢出。
+- 公开示例页的可见版本与当前 Release 保持一致，同时保留 `v1.3.0` 密度规则的历史语义。
+
+### Added
+- 新增真实浏览器回归、GitHub Actions CI 与私密安全报告入口。
+
 ## [1.3.1] - 2026-06-10
 
 ### Changed

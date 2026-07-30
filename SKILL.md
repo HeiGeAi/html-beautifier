@@ -11,7 +11,7 @@ description: >
 license: MIT
 metadata:
   author: Blake 黑哥
-  version: 1.3.1
+  version: 1.3.2
   compatible_platforms: ["Claude Code", "Cursor", "Windsurf", "Cline", "Aider", "OpenClaw", "Hermes", "ChatGPT", "Claude.ai", "通用 AI 助手"]
 ---
 
