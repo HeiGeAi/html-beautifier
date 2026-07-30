@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.3.1-blue.svg)
+![Version](https://img.shields.io/badge/version-1.3.2-blue.svg)
 ![Claude](https://img.shields.io/badge/Claude-Skill-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -392,6 +392,11 @@ html-beautifier/
 ---
 
 ## 版本历史 Version History
+
+### v1.3.2 (2026-07-31)
+- 🐛 修复移动端安装代码块造成的 1px 横向溢出
+- 🔄 两个公开示例页的可见版本与当前 Release 保持一致
+- ✅ 新增真实浏览器回归、GitHub Actions CI 与私密安全报告入口
 
 ### v1.3.1 (2026-06-10)
 - 🔄 安装方式全面改为 git clone 整目录，所有命令统一加 `--depth 1`
