@@ -1,0 +1,44 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import test from 'node:test';
+import { chromium } from 'playwright-core';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const chromeCandidates = [
+  process.env.CHROME_PATH,
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  '/Applications/Chromium.app/Contents/MacOS/Chromium',
+  '/usr/bin/google-chrome',
+  '/usr/bin/chromium',
+].filter(Boolean);
+const chrome = chromeCandidates.find((candidate) => fs.existsSync(candidate));
+
+test('public examples expose the current release version', () => {
+  for (const name of ['demo.html', 'skill-introduction.html']) {
+    const source = fs.readFileSync(path.join(ROOT, 'examples', name), 'utf8');
+    assert.match(source, /v1\.3\.2/);
+  }
+});
+
+test('demo does not overflow horizontally at a 390px mobile viewport', async () => {
+  const browser = await chromium.launch({
+    ...(chrome ? { executablePath: chrome } : {}),
+    headless: true,
+  });
+  try {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await page.route(/^https?:/, (route) => route.abort());
+    await page.goto(pathToFileURL(path.join(ROOT, 'examples', 'demo.html')).href, { waitUntil: 'load' });
+
+    const metrics = await page.evaluate(() => ({
+      viewportWidth: window.innerWidth,
+      documentWidth: document.documentElement.scrollWidth,
+    }));
+
+    assert.equal(metrics.documentWidth, metrics.viewportWidth);
+  } finally {
+    await browser.close();
+  }
+});
