@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.3.2-blue.svg)
+![Version](https://img.shields.io/badge/version-1.3.3-blue.svg)
 ![Claude](https://img.shields.io/badge/Claude-Skill-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -400,6 +400,12 @@ html-beautifier/
 ---
 
 ## 版本历史 Version History
+
+### v1.3.3 (2026-09-13)
+- 🐛 密度硬规则自洽：side-by-side gap 降为 18px，移除 gap-20 / gap-24 工具类
+- 🐛 介绍页补 1024px 断点，删除废弃 .page-number 组件残留
+- 🔒 cdnjs 链接加 SRI 校验，README 依赖口径统一为仅依赖 CDN 字体与图标
+- 🔄 版本断言改从 package.json 读取，CI 缓存 Playwright 浏览器
 
 ### v1.3.2 (2026-07-31)
 - 🐛 修复移动端安装代码块造成的 1px 横向溢出

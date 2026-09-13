@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.3] - 2026-09-13
+
+### Fixed
+- 🐛 密度硬规则自洽：side-by-side gap 24px 降为 18px，移除违反「gap ≤ card padding」的 gap-20 / gap-24 工具类
+- 🐛 介绍页补 1024px 响应式断点，grid-3 在平板区间回落两列，对齐自家验收清单 G 项
+- 🐛 删除已废弃 Deck 模式的 .page-number 组件残留（design-system.md 与 quality-checklist.md 引用）
+- 🐛 README 项目结构图补 tests/、.github/workflows/ci.yml、package.json、package-lock.json、SECURITY.md
+- 🔒 cdnjs 样式链接加 integrity/crossorigin SRI 校验；README 依赖口径统一为「单文件输出，仅依赖 CDN 字体与图标」
+- 🔄 版本断言改从 package.json 读取，发版不再需要手动同步测试
+- ⚡ CI 缓存 Playwright 浏览器（key 绑 playwright-core 版本），缩短流水线耗时
+
 ## [1.3.2] - 2026-07-31
 
 ### Fixed
