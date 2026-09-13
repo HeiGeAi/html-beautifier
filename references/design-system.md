@@ -663,7 +663,7 @@ HTML 骨架：
 ```css
 .side-by-side {
     display: grid; grid-template-columns: 1fr 1fr;
-    gap: 24px; margin: 24px 0;
+    gap: 18px; margin: 24px 0;
 }
 ```
 
@@ -689,8 +689,7 @@ HTML 骨架：
 .justify-center { justify-content: center; }
 .flex-1 { flex: 1; }
 .gap-6 { gap: 6px; } .gap-8 { gap: 8px; } .gap-10 { gap: 10px; }
-.gap-12 { gap: 12px; } .gap-16 { gap: 16px; } .gap-20 { gap: 20px; }
-.gap-24 { gap: 24px; }
+.gap-12 { gap: 12px; } .gap-16 { gap: 16px; } .gap-18 { gap: 18px; }
 
 /* 文字 */
 .fw-600 { font-weight: 600; } .fw-700 { font-weight: 700; } .fw-900 { font-weight: 900; }
