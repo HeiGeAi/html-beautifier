@@ -15,10 +15,13 @@ const chromeCandidates = [
 ].filter(Boolean);
 const chrome = chromeCandidates.find((candidate) => fs.existsSync(candidate));
 
+const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
+const versionPattern = new RegExp(`v${pkg.version.replace(/\./g, '\\.')}`);
+
 test('public examples expose the current release version', () => {
   for (const name of ['demo.html', 'skill-introduction.html']) {
     const source = fs.readFileSync(path.join(ROOT, 'examples', name), 'utf8');
-    assert.match(source, /v1\.3\.2/);
+    assert.match(source, versionPattern);
   }
 });
 
