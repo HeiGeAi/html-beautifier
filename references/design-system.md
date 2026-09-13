@@ -107,16 +107,6 @@ body {
     font-weight: 400;
 }
 
-.page-number {
-    position: absolute;
-    bottom: 16px;
-    right: 24px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    color: var(--ink-400);
-    font-weight: 500;
-}
-
 /* 通用内容容器 */
 .section-page {
     padding: 32px 40px;

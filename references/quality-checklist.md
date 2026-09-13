@@ -145,7 +145,6 @@
   @media print {
       body { background: #fff; }
       .card-light { break-inside: avoid; }
-      .page-number { display: none; }
   }
   ```
 
