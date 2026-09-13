@@ -333,9 +333,17 @@ html-beautifier/
 │   ├── skill-introduction.html # 官方介绍页
 │   └── assets/
 │       └── intro-header.png   # 介绍页顶部视觉图
+├── tests/                      # 浏览器回归测试
+│   └── mobile-overflow.test.mjs # 移动端横向溢出回归
+├── .github/
+│   └── workflows/
+│       └── ci.yml              # CI（npm test）
+├── package.json                # 版本号与测试脚本
+├── package-lock.json           # 依赖锁定
 ├── USAGE.md                    # 详细使用指南
 ├── CHANGELOG.md                # 版本更新历史
 ├── LICENSE                     # MIT 许可证
+├── SECURITY.md                 # 安全策略
 └── README.md                   # 本文件
 ```
 
